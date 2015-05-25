@@ -1,0 +1,21 @@
+<h1>Cards</h1>
+<table id="cards">
+  <tr>
+    <th>Name</th>
+    <th>ManaCost</th>
+    <th>Type - Subtype</th>
+    <th>Rarity</th>
+    <th>Text</th>
+    <th>Power/Toughness</th>
+  </tr>
+  <% @cards.each do |card| %>
+    <tr>
+      <td><%= card.name %></td>
+      <td><%= card.mana_cost %></td>
+      <td><%= card.type_and_subtype %></td>
+      <td><%= card.rarity %></td>
+      <td><%= card.text %></td>
+      <td><%= card.power_and_toughness %></td>
+    </tr>
+  <% end %>
+</table>

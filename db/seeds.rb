@@ -26,18 +26,8 @@
     end
     puts "#{set_data['name']} added."
   end
+  
 =begin
-  sets.first[1]['cards'].each do |c|
-    cards << { name:              c['name'],
-               manaCost:          c['manaCost'],
-               colors:            c['colors'],
-               types:             c['types'],
-               subtypes:          c['subtypes'],
-               rarity:            c['rarity'],
-               text:              c['text'],
-               power_toughness: [ c['power'], c['toughness'] ] }
-  end
-
   cards.each do |c|
     def clean_field(card, key)
       if (card[key].is_a?(Array)) && (card[key].count == 1)
