@@ -15,15 +15,16 @@
 
   sets.each do |set_code, set_data|
     set_data['cards'].each do |c|
-      Card.find_or_create_by_name(
-        name:       c['name'],       mana_cost:       c['manaCost'],
-        colors:     c['colors'],     types:           c['types'],
-        subtypes:   c['subtypes'],   rarity:          c['rarity'],
-        text:       c['text'],       power:           c['power'],
-        toughness:  c['toughness'],  printings:       c['printings'],
-        legalities: c['legalities'], cmc:             c['cmc']
+      Card.create!(
+        name:       c['name'],       colors:     c['colors'],
+        mana_cost:  c['manaCost'],   cmc:        c['cmc'],
+        types:      c['types'],      subtypes:   c['subtypes'],
+        rarity:     c['rarity'],     text:       c['text'],
+        power:      c['power'],      toughness:  c['toughness'],
+        legalities: c['legalities'], printings:  c['printings']
         )
     end
+    puts "#{set_data['name']} added."
   end
 =begin
   sets.first[1]['cards'].each do |c|

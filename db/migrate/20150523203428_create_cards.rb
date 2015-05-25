@@ -1,7 +1,7 @@
 class CreateCards < ActiveRecord::Migration
   def change
     create_table :cards do |t|
-      t.string  :name
+      t.string  :name, unique: true
       t.string  :colors
       t.string  :mana_cost
       t.integer :cmc
