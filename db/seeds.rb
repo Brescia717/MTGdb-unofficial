@@ -6,25 +6,26 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-=begin
+
   require 'json'
 
   file = File.read("AllSets-x.json")
   sets = JSON.parse(file)
-  cards = Array.new
+  # cards = Array.new
 
   sets.each do |set_code, set_data|
-    set_data['card'].each do |c|
-      Card.create(
-        name:      c['name'],      mana_cost:       c['manaCost'],
-        colors:    c['colors'],    types:           c['types'],
-        subtypes:  c['subtypes'],  rarity:          c['rarity'],
-        text:      c['text'],      power:           c['power'],
-        toughness: c['toughness'], printings:       c['printings']
+    set_data['cards'].each do |c|
+      Card.find_or_create_by_name(
+        name:       c['name'],       mana_cost:       c['manaCost'],
+        colors:     c['colors'],     types:           c['types'],
+        subtypes:   c['subtypes'],   rarity:          c['rarity'],
+        text:       c['text'],       power:           c['power'],
+        toughness:  c['toughness'],  printings:       c['printings'],
+        legalities: c['legalities'], cmc:             c['cmc']
         )
     end
   end
-
+=begin
   sets.first[1]['cards'].each do |c|
     cards << { name:              c['name'],
                manaCost:          c['manaCost'],
@@ -35,6 +36,7 @@
                text:              c['text'],
                power_toughness: [ c['power'], c['toughness'] ] }
   end
+
   cards.each do |c|
     def clean_field(card, key)
       if (card[key].is_a?(Array)) && (card[key].count == 1)
