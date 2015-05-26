@@ -11,22 +11,27 @@
 
   file = File.read("AllSets-x.json")
   sets = JSON.parse(file)
-  # cards = Array.new
+  cards = []
 
   sets.each do |set_code, set_data|
     set_data['cards'].each do |c|
-      Card.create!(
-        name:       c['name'],       colors:     c['colors'],
-        mana_cost:  c['manaCost'],   cmc:        c['cmc'],
-        types:      c['types'],      subtypes:   c['subtypes'],
-        rarity:     c['rarity'],     text:       c['text'],
-        power:      c['power'],      toughness:  c['toughness'],
-        legalities: c['legalities'], printings:  c['printings']
-        )
+      if cards.include?(c['name']) == false
+        cards << c['name']
+        Card.create(
+          name:       c['name'],       colors:     c['colors'],
+          mana_cost:  c['manaCost'],   cmc:        c['cmc'],
+          types:      c['types'],      subtypes:   c['subtypes'],
+          rarity:     c['rarity'],     text:       c['text'],
+          power:      c['power'],      toughness:  c['toughness'],
+          legalities: c['legalities'], printings:  c['printings']
+          )
+      else
+        next
+      end
     end
     puts "#{set_data['name']} added."
   end
-  
+
 =begin
   cards.each do |c|
     def clean_field(card, key)

@@ -1,8 +1,29 @@
 <h1>Cards</h1>
+
+<%= search_form_for @search do |f| %>
+  <div class="field">
+    <%= f.label :name_cont, "Name" %>
+    <%= f.text_field :name_cont %>
+    <%= f.label :cmc_gteq, "CMC between" %>
+    <%= f.text_field :cmc_gteq %>
+    <%= f.label :cmc_lteq, "and" %>
+    <%= f.text_field :cmc_lteq %>
+    <%= f.label :types_cont, "Type" %>
+    <%= f.text_field :types_cont %>
+    <%= f.label :subtypes_cont, "Subtype" %>
+    <%= f.text_field :subtypes_cont %>
+    <%= f.label :power_eq, "Power" %>
+    <%= f.text_field :power_eq %>
+    <%= f.label :toughness_eq, "Toughness" %>
+    <%= f.text_field :toughness_eq %>
+  </div>
+  <div class="actions"><%= f.submit "Search" %></div>
+<% end %>
+
 <table id="cards">
   <tr>
-    <th>Name</th>
-    <th>ManaCost</th>
+    <th><%= sort_link @search, :name, "Name" %></th>
+    <th><%= sort_link @search, :cmc, "ManaCost" %></th>
     <th>Type - Subtype</th>
     <th>Rarity</th>
     <th>Text</th>
@@ -19,3 +40,4 @@
     </tr>
   <% end %>
 </table>
+<%= paginate @cards %>
