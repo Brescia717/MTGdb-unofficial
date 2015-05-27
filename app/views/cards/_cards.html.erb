@@ -1,0 +1,24 @@
+<%= paginate @cards %>
+<table id="cards">
+  <tr>
+    <th><%= sort_link @search, :name, "Name" %></th>
+    <th><%= sort_link @search, :cmc, "ManaCost" %></th>
+    <th>Type - Subtype</th>
+    <th>Rarity</th>
+    <th>Text</th>
+    <th>Power/Toughness</th>
+    <th>Sets Printed</th>
+  </tr>
+  <% @cards.each do |card| %>
+    <tr>
+      <td><%= card.name %></td>
+      <td><%= card.mana_cost %></td>
+      <td><%= card.type_and_subtype %></td>
+      <td><%= card.rarity %></td>
+      <td><%= card.text %></td>
+      <td><%= card.power_and_toughness %></td>
+      <td><%= card.sets_printed %></td>
+    </tr>
+  <% end %>
+</table>
+<%= paginate @cards %>
