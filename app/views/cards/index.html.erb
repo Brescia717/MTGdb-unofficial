@@ -1,43 +1,9 @@
 <h1>Cards</h1>
+<%= javascript_tag "pagination" %>
 
-<%= search_form_for @search do |f| %>
-  <div class="field">
-    <%= f.label :name_cont, "Name" %>
-    <%= f.text_field :name_cont %>
-    <%= f.label :cmc_gteq, "CMC between" %>
-    <%= f.text_field :cmc_gteq %>
-    <%= f.label :cmc_lteq, "and" %>
-    <%= f.text_field :cmc_lteq %>
-    <%= f.label :types_cont, "Type" %>
-    <%= f.text_field :types_cont %>
-    <%= f.label :subtypes_cont, "Subtype" %>
-    <%= f.text_field :subtypes_cont %>
-    <%= f.label :power_eq, "Power" %>
-    <%= f.text_field :power_eq %>
-    <%= f.label :toughness_eq, "Toughness" %>
-    <%= f.text_field :toughness_eq %>
-  </div>
-  <div class="actions"><%= f.submit "Search" %></div>
-<% end %>
-
-<table id="cards">
-  <tr>
-    <th><%= sort_link @search, :name, "Name" %></th>
-    <th><%= sort_link @search, :cmc, "ManaCost" %></th>
-    <th>Type - Subtype</th>
-    <th>Rarity</th>
-    <th>Text</th>
-    <th>Power/Toughness</th>
-  </tr>
-  <% @cards.each do |card| %>
-    <tr>
-      <td><%= card.name %></td>
-      <td><%= card.mana_cost %></td>
-      <td><%= card.type_and_subtype %></td>
-      <td><%= card.rarity %></td>
-      <td><%= card.text %></td>
-      <td><%= card.power_and_toughness %></td>
-    </tr>
-  <% end %>
-</table>
-<%= paginate @cards %>
+<div id="search">
+  <%= render "search" %>
+</div>
+<div id="cards">
+  <%= render "cards" %>
+</div>

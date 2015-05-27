@@ -1,6 +1,8 @@
 class Card < ActiveRecord::Base
   validates_uniqueness_of :name
 
+  belongs_to :decks
+
   serialize :colors, JSON
   serialize :legalities, JSON
   serialize :printings, JSON
@@ -20,5 +22,9 @@ class Card < ActiveRecord::Base
 
   def power_and_toughness
     "#{self.power}/#{self.toughness}" if (self.power && self.toughness)
+  end
+
+  def sets_printed
+    "#{self.printings.to_s.delete('[""]')}" if self.printings
   end
 end
