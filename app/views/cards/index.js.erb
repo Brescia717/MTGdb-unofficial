@@ -1,1 +1,1 @@
-$("#cards").html("<%= escape_javascript(render 'cards') %>");
+$("#cards").html("<%= escape_javascript(render 'cards', cards: @cards) %>");
