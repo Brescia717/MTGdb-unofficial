@@ -1,5 +1,6 @@
 $(function() {
-  $(".pagination a").live("click", function() {
+  $(".pagination a").on("click", function(event) {
+    event.preventDefault;
     $.get(this.href, null, null, "script");
     return false;
   });

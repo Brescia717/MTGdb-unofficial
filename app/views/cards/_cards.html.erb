@@ -1,6 +1,8 @@
-<%= paginate @cards %>
-<table id="cards">
-  <tr>
+<div id="paginator">
+  <%= paginate @cards, remote: true %>
+</div>
+<table id="cards_table">
+  <tr class="sort">
     <th><%= sort_link @search, :name, "Name" %></th>
     <th><%= sort_link @search, :cmc, "ManaCost" %></th>
     <th>Type - Subtype</th>
@@ -21,4 +23,6 @@
     </tr>
   <% end %>
 </table>
-<%= paginate @cards %>
+<div id="paginator">
+  <%= paginate @cards, remote: true %>
+</div>

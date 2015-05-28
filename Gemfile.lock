@@ -178,7 +178,7 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   devise
   jbuilder (~> 2.0)
-  jquery-rails
+  jquery-rails (~> 4.0.3)
   json
   kaminari
   pg
