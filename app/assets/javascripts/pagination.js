@@ -1,17 +1,20 @@
-$(function() {
-  $(".pagination a").on("click", function(event) {
-    event.preventDefault;
-    $.get(this.href, null, null, "script");
-    return false;
-  });
-  $(".card_search submit").live("click", function() {
-    event.preventDefault;
-    $.get(this.href, null, null, "script");
-    return false;
-  });
-  // $(".sort a .sort_link").live("click", function() {
-  //   event.preventDefault;
-  //   $.get(this.href, null, null, "script");
-  //   return false;
-  // });
+$(function () {
+  // Sorting and pagination links
+  $('#cards').on('click', 'th a, .pagination a', function () {
+      $.getScript(this.href);
+      return false;
+    }
+  );
 });
+// $(function() {
+//   (function( $ ) {
+//     $.fn.ajaxMyLinks = function () {
+//       this.on("click", function(event) {
+//         event.preventDefault;
+//         $.getScript(this.href);
+//         return false;
+//     }
+//   });
+//   $(".pagination a").ajaxMyLinks();
+//   $("th a").ajaxMyLinks();
+// });
