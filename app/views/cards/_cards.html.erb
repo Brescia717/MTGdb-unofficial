@@ -1,13 +1,14 @@
-<%= paginate @cards %>
-<table id="cards">
-  <tr>
+<div id="paginator"><%= paginate @cards, remote: true %></div>
+<table id="cards_table">
+  <tr class="sort">
     <th><%= sort_link @search, :name, "Name" %></th>
-    <th><%= sort_link @search, :cmc, "ManaCost" %></th>
+    <th><%= sort_link @search, :cmc,  "ManaCost" %></th>
     <th>Type - Subtype</th>
     <th>Rarity</th>
     <th>Text</th>
     <th>Power/Toughness</th>
     <th>Sets Printed</th>
+    <th>CardImage</th>
   </tr>
   <% @cards.each do |card| %>
     <tr>
@@ -18,7 +19,10 @@
       <td><%= card.text %></td>
       <td><%= card.power_and_toughness %></td>
       <td><%= card.sets_printed %></td>
+      <td>
+        <img src=<%= card.fetch_image %> class="img-responsive" alt=<%= card.name %> />
+      </td>
     </tr>
   <% end %>
 </table>
-<%= paginate @cards %>
+<div id="paginator"><%= paginate @cards, remote: true %></div>

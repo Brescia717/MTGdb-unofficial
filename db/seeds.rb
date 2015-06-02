@@ -1,49 +1,65 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+require 'json'
+require 'fileutils'
+require 'net/http'
+require 'open-uri'
 
+file = File.read("AllSets-x.json")
+sets = JSON.parse(file)
+# cards = []
 
-  require 'json'
-
-  file = File.read("AllSets-x.json")
-  sets = JSON.parse(file)
-  cards = []
-
-  sets.each do |set_code, set_data|
-    set_data['cards'].each do |c|
-      if cards.include?(c['name']) == false
-        cards << c['name']
-        Card.create(
-          name:       c['name'],       colors:     c['colors'],
-          mana_cost:  c['manaCost'],   cmc:        c['cmc'],
-          types:      c['types'],      subtypes:   c['subtypes'],
-          rarity:     c['rarity'],     text:       c['text'],
-          power:      c['power'],      toughness:  c['toughness'],
-          legalities: c['legalities'], printings:  c['printings']
-          )
-      else
-        next
-      end
-    end
-    puts "#{set_data['name']} added."
+# This will be modified later to include more information, including multiverseid for card images.
+sets.each do |set_key, set_data|
+  set_data['cards'].each do |c|
+    # if cards.include?(c['name']) == false
+    #   cards << c['name']
+      Card.create(
+        name:         c['name'],              colors:       c['colors'],
+        mana_cost:    c['manaCost'],          cmc:          c['cmc'],
+        types:        c['types'],             subtypes:     c['subtypes'],
+        rarity:       c['rarity'],            text:         c['text'],
+        power:        c['power'],             toughness:    c['toughness'],
+        legalities:   c['legalities'],        printings:    c['printings'],
+        multiverseid: c['multiverseid'],      flavor:       c['flavor'],
+        artist:       c['artist'],            card_number:  c['number'],
+        card_set:     set_data['name'],       set_code:     set_data['code'],
+        release_date: set_data['releaseDate'],
+        image_url:    "https://api.mtgdb.info/content/card_images/#{c["multiverseid"]}.jpeg",
+        hi_image_url: "https://api.mtgdb.info/content/hi_res_card_images/#{c["multiverseid"]}.jpg"
+        )
+    # else
+    #   next
+    # end
   end
+  puts "#{set_data['name']} added."
+end
 
+# Add folders for set images
 =begin
-  cards.each do |c|
-    def clean_field(card, key)
-      if (card[key].is_a?(Array)) && (card[key].count == 1)
-        card[key] = card[key].flatten.compact.first
+sets.each do |set_code, set_data|
+  path = "images/#{set_data['name']}"
+  FileUtils::mkdir_p path
+  puts "Folder #{set_data['name']} created!"
+end
+=end
+
+# Add images to respective folders
+=begin
+sets.each do |set_code, set_data|
+  set_name = set_data['name']
+  puts "Adding #{set_name}..."
+  set_data['cards'].each do |c|
+    url = "http://api.mtgdb.info/content/card_images/#{c['multiverseid']}.jpeg"
+    uri = URI.parse(url)
+    req = Net::HTTP.new(uri.host, uri.port)
+    res = req.request_head(uri.path)
+    if (res.code == "200")
+      File.open("images/#{set_name}/#{c['name']}.jpeg", "wb") do |f|
+        f.write open(url).read
       end
-    end
-    clean_field(c, :types)
-    clean_field(c, :subtypes)
-    clean_field(c, :colors)
-    if (c[:power_toughness].is_a?(Array)) && (c[:types].include?("Creature") == false)
-      c.delete(:power_toughness)
+    else
+      next
     end
   end
+  puts "Set #{set_name} added!"
+end
 =end
