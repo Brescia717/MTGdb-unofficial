@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150526224236) do
+ActiveRecord::Schema.define(version: 20150601024150) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,8 +29,17 @@ ActiveRecord::Schema.define(version: 20150526224236) do
     t.string   "toughness"
     t.text     "legalities"
     t.text     "printings"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.string   "card_set"
+    t.string   "set_code"
+    t.date     "release_date"
+    t.integer  "multiverseid"
+    t.integer  "card_number"
+    t.string   "flavor"
+    t.string   "artist"
+    t.string   "image_url"
+    t.string   "hi_image_url"
   end
 
   create_table "decks", force: :cascade do |t|

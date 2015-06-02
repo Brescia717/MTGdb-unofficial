@@ -5,35 +5,33 @@ require 'open-uri'
 
 file = File.read("AllSets-x.json")
 sets = JSON.parse(file)
-cards = []
+# cards = []
 
 # This will be modified later to include more information, including multiverseid for card images.
-sets.each do |set_code, set_data|
+sets.each do |set_key, set_data|
   set_data['cards'].each do |c|
-    if cards.include?(c['name']) == false
-      cards << c['name']
+    # if cards.include?(c['name']) == false
+    #   cards << c['name']
       Card.create(
-        name:       c['name'],       colors:     c['colors'],
-        mana_cost:  c['manaCost'],   cmc:        c['cmc'],
-        types:      c['types'],      subtypes:   c['subtypes'],
-        rarity:     c['rarity'],     text:       c['text'],
-        power:      c['power'],      toughness:  c['toughness'],
-        legalities: c['legalities'], printings:  c['printings']
+        name:         c['name'],              colors:       c['colors'],
+        mana_cost:    c['manaCost'],          cmc:          c['cmc'],
+        types:        c['types'],             subtypes:     c['subtypes'],
+        rarity:       c['rarity'],            text:         c['text'],
+        power:        c['power'],             toughness:    c['toughness'],
+        legalities:   c['legalities'],        printings:    c['printings'],
+        multiverseid: c['multiverseid'],      flavor:       c['flavor'],
+        artist:       c['artist'],            card_number:  c['number'],
+        card_set:     set_data['name'],       set_code:     set_data['code'],
+        release_date: set_data['releaseDate'],
+        image_url:    "https://api.mtgdb.info/content/card_images/#{c["multiverseid"]}.jpeg",
+        hi_image_url: "https://api.mtgdb.info/content/hi_res_card_images/#{c["multiverseid"]}.jpg"
         )
-    else
-      next
-    end
+    # else
+    #   next
+    # end
   end
   puts "#{set_data['name']} added."
 end
-
-# This is temporary, and these columns will be added to the Cards migration.
-=begin
-card_set      = set_data["name"]
-set_code      = set_data["code"]
-release_date  = set_data["releaseDate"]
-card_total    = set_data["cards"].count
-=end
 
 # Add folders for set images
 =begin

@@ -27,4 +27,8 @@ class Card < ActiveRecord::Base
   def sets_printed
     "#{self.printings.to_s.delete('[""]')}" if self.printings
   end
+
+  def fetch_image
+    "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=#{self.multiverseid}&type=card"
+  end
 end

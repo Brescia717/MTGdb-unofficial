@@ -8,6 +8,7 @@
     <th>Text</th>
     <th>Power/Toughness</th>
     <th>Sets Printed</th>
+    <th>CardImage</th>
   </tr>
   <% @cards.each do |card| %>
     <tr>
@@ -18,6 +19,9 @@
       <td><%= card.text %></td>
       <td><%= card.power_and_toughness %></td>
       <td><%= card.sets_printed %></td>
+      <td>
+        <img src=<%= card.fetch_image %> class="img-responsive" alt=<%= card.name %> />
+      </td>
     </tr>
   <% end %>
 </table>
