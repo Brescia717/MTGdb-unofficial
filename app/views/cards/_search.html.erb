@@ -1,3 +1,4 @@
+<!-- form from ransack gem -->
 <%= search_form_for @search, remote: true do |f| %>
   <div class="field">
     <%= f.label :name_cont, "Name" %>
@@ -14,6 +15,8 @@
     <%= f.text_field :power_eq %>
     <%= f.label :toughness_eq, "Toughness" %>
     <%= f.text_field :toughness_eq %>
+    <%= f.label :printings_cont, "From Set" %>
+    <%= f.text_field :printings_cont %>
   </div>
   <div class="actions"><%= f.submit "Search" %></div>
 <% end %>

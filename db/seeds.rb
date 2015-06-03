@@ -10,8 +10,9 @@ sets = JSON.parse(file)
 # This will be modified later to include more information, including multiverseid for card images.
 sets.each do |set_key, set_data|
   set_data['cards'].each do |c|
-    # if cards.include?(c['name']) == false
-    #   cards << c['name']
+    if c['multiverseid'] == nil
+      next
+    else
       Card.create(
         name:         c['name'],              colors:       c['colors'],
         mana_cost:    c['manaCost'],          cmc:          c['cmc'],
@@ -26,9 +27,7 @@ sets.each do |set_key, set_data|
         image_url:    "https://api.mtgdb.info/content/card_images/#{c["multiverseid"]}.jpeg",
         hi_image_url: "https://api.mtgdb.info/content/hi_res_card_images/#{c["multiverseid"]}.jpg"
         )
-    # else
-    #   next
-    # end
+    end
   end
   puts "#{set_data['name']} added."
 end
