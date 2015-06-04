@@ -1,3 +1,15 @@
-
-<h1><%= "#{@card.name}" %></h1>
-<img src="<%= @card.image_url %>" alt="@card.name" />
+<div class="card-show">
+  <div id="card-image-box">
+    <img src="<%= @card.image_url %>" alt="@card.name" />
+  </div>
+  <div id="card-info-header">
+    <h2>Card info: </h2>
+  </div>
+  <div id="card-info-box">
+    <hr/>
+    <p>Name:  <%= @card.name %><p>
+    <p>Types: <%= @card.type_and_subtype %><p>
+    <p>Text:  <%= @card.text %><p>
+    <p><%= "Power/Toughness: #{@card.power_and_toughness}" if @card.power_and_toughness %></p>
+  </div>
+</div>
