@@ -30,4 +30,8 @@ class SearchFields
       [f, f]
     end
   end
+
+  def colors
+    ['Black','Blue','White','Red','Green']
+  end
 end
