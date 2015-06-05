@@ -3,20 +3,25 @@
   <div class="field">
     <%= f.label :name_cont, "Name" %>
     <%= f.text_field :name_cont %>
-    <%= f.label :cmc_gteq, "CMC between" %>
-    <%= f.text_field :cmc_gteq %>
-    <%= f.label :cmc_lteq, "and" %>
-    <%= f.text_field :cmc_lteq %>
+    <%= f.label :cmc_gteq, "CMC" %>
+    <%= f.select :cmc_gteq, 0..20, {include_blank: ""} %>
+    <%= f.label :cmc_lteq, "<=>" %>
+    <%= f.select :cmc_lteq, 1..20, {include_blank: ""} %>
     <%= f.label :types_cont, "Type" %>
     <%= f.text_field :types_cont %>
     <%= f.label :subtypes_cont, "Subtype" %>
     <%= f.text_field :subtypes_cont %>
     <%= f.label :power_eq, "Power" %>
-    <%= f.text_field :power_eq %>
+    <%= f.select :power_eq, 0..20, {include_blank: ""} %>
     <%= f.label :toughness_eq, "Toughness" %>
-    <%= f.text_field :toughness_eq %>
-    <%= f.label :printings_cont, "From Set" %>
+    <%= f.select :toughness_eq, 1..20, {include_blank: ""} %>
+    <%= f.label "Set" %>
+    <%= f.hidden_field :printings_cont %>
     <%= f.text_field :printings_cont %>
   </div>
-  <div class="actions"><%= f.submit "Search" %></div>
+  <div class="actions">
+    <%= f.submit "Search" %><br>
+    <%= link_to "Clear Search", request.path, class:"cancel-button" %>
+  </div>
 <% end %>
+<hr/>

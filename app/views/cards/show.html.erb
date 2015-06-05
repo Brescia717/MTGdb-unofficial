@@ -7,9 +7,16 @@
   </div>
   <div id="card-info-box">
     <hr/>
-    <p>Name:  <%= @card.name %><p>
-    <p>Types: <%= @card.type_and_subtype %><p>
-    <p>Text:  <%= @card.text %><p>
-    <p><%= "Power/Toughness: #{@card.power_and_toughness}" if @card.power_and_toughness %></p>
+    <p><strong>Name: </strong><%= @card.name %></p>
+    <p><strong>Types: </strong><%= @card.type_and_subtype %></p>
+    <p><strong>Text:  </strong><%= @card.text %></p>
+    <% if @card.power_and_toughness %>
+      <p><strong>Power/Toughness: </strong><%= @card.power_and_toughness %></p>
+    <% end %><br>
+    <p><strong>Printings: </strong><%= @card.sets_printed %></p><br>
+    <p><strong>Legalities: </strong></p>
+    <% @card.legalities.each do |mtg_format, legality| %>
+      <p><%= "#{mtg_format}: #{legality}" %></p>
+    <% end %>
   </div>
 </div>
