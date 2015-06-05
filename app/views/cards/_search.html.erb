@@ -6,18 +6,20 @@
     <%= f.label :cmc_gteq, "CMC" %>
     <%= f.select :cmc_gteq, 0..20, {include_blank: ""} %>
     <%= f.label :cmc_lteq, "<=>" %>
-    <%= f.select :cmc_lteq, 1..20, {include_blank: ""} %>
+    <%= f.select :cmc_lteq, 0..20, {include_blank: ""} %>
     <%= f.label :types_cont, "Type" %>
-    <%= f.text_field :types_cont %>
+    <%= f.select :types_cont, SearchFields.new().types, {:include_blank => true} %>
     <%= f.label :subtypes_cont, "Subtype" %>
     <%= f.text_field :subtypes_cont %>
     <%= f.label :power_eq, "Power" %>
     <%= f.select :power_eq, 0..20, {include_blank: ""} %>
     <%= f.label :toughness_eq, "Toughness" %>
-    <%= f.select :toughness_eq, 1..20, {include_blank: ""} %>
+    <%= f.select :toughness_eq, 0..20, {include_blank: ""} %>
     <%= f.label "Set" %>
     <%= f.hidden_field :printings_cont %>
     <%= f.text_field :printings_cont %>
+    <%= f.label :legalities_cont, "Format" %>
+    <%= f.select :legalities_cont, SearchFields.new().legal_formats %>
   </div>
   <div class="actions">
     <%= f.submit "Search" %><br>

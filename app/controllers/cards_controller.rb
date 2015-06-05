@@ -1,7 +1,7 @@
 class CardsController < ApplicationController
   def index
     @search = Card.search(params[:q])
-    @cards  = @search.result.page params[:page]
+    @cards  = @search.result.page(params[:page])
   end
 
   def show
@@ -11,6 +11,6 @@ class CardsController < ApplicationController
   private
 
   def card_params
-    params.require(:card).permit(:multiverseid, :name, :id)
+    params[:card].permit!
   end
 end
