@@ -1,0 +1,22 @@
+<div class="card-show">
+  <div id="card-image-box">
+    <img src="<%= @card.fetch_image %>" alt="@card.name" />
+  </div>
+  <div id="card-info-header">
+    <h2>Card info: </h2>
+  </div>
+  <div id="card-info-box">
+    <hr/>
+    <p><strong>Name: </strong><%= @card.name %></p>
+    <p><strong>Types: </strong><%= @card.type_and_subtype %></p>
+    <p><strong>Text:  </strong><%= @card.text %></p>
+    <% if @card.power_and_toughness %>
+      <p><strong>Power/Toughness: </strong><%= @card.power_and_toughness %></p>
+    <% end %><br>
+    <p><strong>Printings: </strong><%= @card.sets_printed %></p><br>
+    <p><strong>Legalities: </strong></p>
+    <% @card.legalities.each do |mtg_format, legality| %>
+      <p><%= "#{mtg_format}: #{legality}" %></p>
+    <% end %>
+  </div>
+</div>

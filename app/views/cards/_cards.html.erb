@@ -1,28 +1,30 @@
 <div id="paginator"><%= paginate @cards, remote: true %></div>
-<table id="cards_table">
-  <tr class="sort">
-    <th><%= sort_link @search, :name, "Name" %></th>
-    <th><%= sort_link @search, :cmc,  "ManaCost" %></th>
-    <th>Type - Subtype</th>
-    <th>Rarity</th>
-    <th>Text</th>
-    <th>Power/Toughness</th>
-    <th>Sets Printed</th>
-    <th>CardImage</th>
-  </tr>
-  <% @cards.each do |card| %>
-    <tr>
-      <td><%= card.name %></td>
-      <td><%= card.mana_cost %></td>
-      <td><%= card.type_and_subtype %></td>
-      <td><%= card.rarity %></td>
-      <td><%= card.text %></td>
-      <td><%= card.power_and_toughness %></td>
-      <td><%= card.sets_printed %></td>
-      <td>
-        <img src=<%= card.fetch_image %> class="img-responsive" alt=<%= card.name %> />
-      </td>
+<div id="cards_table">
+  <table>
+    <tr class="sort">
+      <th><%= sort_link @search, :name, "Name" %></th>
+      <th><%= sort_link @search, :cmc,  "ManaCost" %></th>
+      <th>Type - Subtype</th>
+      <th>Rarity</th>
+      <th>Text</th>
+      <th>Power/Toughness</th>
+      <th>CardImage</th>
     </tr>
-  <% end %>
-</table>
+    <% @cards.each do |card| %>
+      <tr>
+        <td><%= card.name %></td>
+        <td><%= card.mana_cost %></td>
+        <td><%= card.type_and_subtype %></td>
+        <td><%= card.rarity %></td>
+        <td><%= card.text %></td>
+        <td><%= card.power_and_toughness %></td>
+        <td>
+          <a href="<%= card_multiverseid_path(card.multiverseid) %>">
+            <img src="<%= card.fetch_image %>" alt="<%= card.name %>" />
+          </a>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+</div>
 <div id="paginator"><%= paginate @cards, remote: true %></div>

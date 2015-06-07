@@ -4,7 +4,7 @@ class AddExtraInfoToCards < ActiveRecord::Migration
     add_column :cards, :set_code,     :string
 
     add_column :cards, :release_date, :date
-    add_column :cards, :multiverseid, :integer, unique: true
+    add_column :cards, :multiverseid, :integer, unique: true, null: false
     add_column :cards, :card_number,  :integer
     add_column :cards, :flavor,       :string
     add_column :cards, :artist,       :string
