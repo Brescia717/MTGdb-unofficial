@@ -18,5 +18,8 @@
     <% @card.legalities.each do |mtg_format, legality| %>
       <p><%= "#{mtg_format}: #{legality}" %></p>
     <% end %>
+    <p>
+      TCGPlayer Pricing: <a href="<%= @card.fetch_price %>"><%= @card.fetch_price %></a>
+    </p>
   </div>
 </div>
