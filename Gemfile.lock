@@ -191,6 +191,7 @@ DEPENDENCIES
   jquery-rails (~> 4.0.3)
   json
   kaminari
+  nokogiri
   paperclip (~> 4.2)
   pg
   pry-rails

@@ -32,12 +32,22 @@ class Card < ActiveRecord::Base
     "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=#{self.multiverseid}&type=card"
   end
 
-  def fetch_price
-    set_name_param  = self.card_set if self.card_set
-    card_name_param = self.name if self.name
-    replacements    = [ [/\s/, "_"], [/,\s/, ",_"] ]
-    replacements.each {|r| card_name_param.gsub!(r[0], r[1]) }
-    replacements.each {|r| set_name_param.gsub!(r[0], r[1])  }
-    "http://shop.tcgplayer.com/magic/product/show?ProductName=#{card_name_param}&newSearch=true"
-  end
+  # def fetch_price
+  #   set_name_param  = self.card_set if self.card_set
+  #   card_name_param = self.name if self.name
+  #   replacements    = [ [/\s/, "+"], [/,\s/, ",_"] ]
+  #   replacements.each {|r| card_name_param.gsub!(r[0], r[1]) }
+  #   replacements.each {|r| set_name_param.gsub!(r[0], r[1])  }
+  #   url = "http://www.mtggoldfish.com/price/#{set_name_param}/#{card_name_param}#online"
+  #   uri = URI.parse(url)
+  #   req = Net::HTTP.new(uri.host, uri.port)
+  #   res = req.request_head(uri.path)
+  #   if (res.code == "200")
+  #     doc = Nokogiri::HTML(open(url))
+  #     paper_price = doc.at_css('div.price-box.paper div.price-box-price').text
+  #   else
+  #     paper_price = '#'
+  #   end
+  #   paper_price
+  # end
 end
