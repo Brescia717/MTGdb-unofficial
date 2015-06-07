@@ -7,7 +7,7 @@
   </div>
   <div id="card-info-box">
     <hr/>
-    <p><strong>Name: </strong><%= @card.name %></p>
+    <p><strong>Name: </strong><%= @card.name.gsub!(/[+]/, ' ') %></p>
     <p><strong>Types: </strong><%= @card.type_and_subtype %></p>
     <p><strong>Text:  </strong><%= @card.text %></p>
     <% if @card.power_and_toughness %>
