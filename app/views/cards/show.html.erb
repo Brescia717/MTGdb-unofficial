@@ -18,8 +18,9 @@
     <% @card.legalities.each do |mtg_format, legality| %>
       <p><%= "#{mtg_format}: #{legality}" %></p>
     <% end %>
+    <br>
     <p>
-      MTGGoldfish Paper Pricing: <a href="<%= @url %>"><%= @card_price %></a>
+      <strong>MTGGoldfish Paper Pricing: </strong><a href="<%= @url %>"><%= @card_price %></a>
     </p>
   </div>
 </div>
