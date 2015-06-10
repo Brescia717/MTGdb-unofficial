@@ -14,10 +14,6 @@
       margin-top: auto;
       margin-bottom: auto;
     }
-    blockquote {
-      position: absolute;
-      width: 100%;
-    }
   }
   #card-info-header {
     display: block;
@@ -27,5 +23,10 @@
     margin-right: 45%;
     margin-top: auto;
     margin-bottom: 2px;
+  }
+  .back-button {
+    position: relative;
+    left: 0px;
+    bottom: 300px;
   }
 }
