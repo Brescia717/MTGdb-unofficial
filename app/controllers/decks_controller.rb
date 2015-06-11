@@ -1,5 +1,5 @@
 class DecksController < ApplicationController
-  before_action :authenticate_user! only: {:create, :edit, :destroy}
+  before_action :authenticate_user!, except: :index
 
   def index
     @decks = Deck.all
@@ -10,24 +10,41 @@ class DecksController < ApplicationController
     @user = current_user
   end
 
+  def new
+    @deck = Deck.new
+  end
+
   def create
-    @deck            = current_user.decks.new
-    @deck.name       = deck_params[:name]
-    @deck.cards      = []
-    @deck.mtg_format = deck_params[:mtg_format]
-    @deck.save!
-    flash[:success]  = "Your new deck with name #{deck_params[:name]} has been created!"
-    redirect_to @deck
+    @deck = Deck.new(deck_params)
+    @deck.user = current_user
+    if @deck.save
+      # flash[:success] = "New deck created!"
+      redirect_to @deck
+    else
+      render 'new'
+    end
   end
 
   def edit
     @deck = Deck.find(params[:id])
-    @deck_cards = @deck.cards.map { |multiverseid| Card.find_by(multiverseid: multiverseid) }  if @deck.cards
+    @deck_cards = @deck.library.map { |multiverseid| Card.find_by(multiverseid: multiverseid) }  if @deck.library
+  end
+
+  def update
+    @deck = Deck.find(params[:id])
+  end
+
+  def destroy
+    @deck = Deck.find(params[:id])
+    if @deck.destroy
+      # flash[:notice] = "Your deck has been deleted."
+      redirect_to decks_path
+    end
   end
 
   private
 
   def deck_params
-    params.require(:deck).permit(:name, :cards, :mtg_format)
+    params.require(:deck).permit(:name, :mtg_format, :library => [])
   end
 end

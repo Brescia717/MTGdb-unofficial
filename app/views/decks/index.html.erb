@@ -1,0 +1,22 @@
+<div class="container">
+  <% if current_user %>
+    <%= link_to "Create a deck", new_deck_path %>
+  <% else %>
+    <%= link_to "Sign in to create a deck!", new_user_session_path %>
+  <% end %>
+  <div class="deck-listings">
+    <h1>Deck Listings</h1>
+    <table>
+      <tr class="sort">
+        <th>Deck Name</th>
+        <th>Format</th>
+      </tr>
+      <% @decks.each do |deck| %>
+        <tr>
+          <td><%= link_to "#{deck.name}", deck_path(deck) %></td>
+          <td><%= deck.mtg_format %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

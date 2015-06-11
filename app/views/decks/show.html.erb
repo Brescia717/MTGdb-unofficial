@@ -1,0 +1,14 @@
+<div class="container">
+  <%= @deck.id %>
+  <%= @deck.name %>
+  <%= @deck.mtg_format %>
+  <% if @deck.library %>
+    <% @deck.library.each do |card, data| %>
+      <%= "#{card}: #{data}" %>
+    <% end %>
+  <% end %>
+  <br>
+  <% if @deck.user == current_user %>
+    <%= link_to "Delete deck", deck_path(@deck), method: :delete, data: {confirm: "Are you sure you want to delete this deck?"} %>
+  <% end %>
+</div>

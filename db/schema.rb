@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 20150601024150) do
   create_table "decks", force: :cascade do |t|
     t.string   "name"
     t.string   "mtg_format"
-    t.text     "cards"
+    t.text     "library"
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

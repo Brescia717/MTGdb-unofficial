@@ -4,6 +4,6 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :cards, through: :decks
   has_many :decks, dependent: :destroy
+  has_many :cards, through: :decks
 end
