@@ -12,7 +12,9 @@
     </tr>
     <% @cards.each do |card| %>
       <tr>
-        <td><%= card.name %></td>
+        <td>
+          <%= link_to card.name, card_multiverseid_path(card.multiverseid) %>
+        </td>
         <td><%= card.mana_cost %></td>
         <td><%= card.type_and_subtype %></td>
         <td><%= card.rarity %></td>
