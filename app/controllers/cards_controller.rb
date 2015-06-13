@@ -32,7 +32,7 @@ class CardsController < ApplicationController
       paper_price = "$#{doc.at_css('div.price-box.paper div.price-box-price').text}"
     else
       paper_price = "Price not found."
-      # @url = '#'
+      @url = '#'
     end
     paper_price
   end

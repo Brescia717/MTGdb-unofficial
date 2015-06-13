@@ -1,13 +1,27 @@
 <div>
   <h1>New Deck</h1>
-  <%= form_for @deck do |f| %>
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-    <%= f.label :mtg_format, "Format" %>
-    <%= f.select :mtg_format, SearchFields.new().legal_formats, {include_blank: true} %>
-    <%= f.label :library %>
-    <%= f.text_area :library, default: :json %>
-
-    <%= f.submit "Create Deck" %>
+  <% if @deck.errors.any? %>
+    <ul>
+      <% @deck.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+    <hr>
   <% end %>
+  <ul>
+    <%= form_for @deck do |f| %>
+      <li>
+        <%= f.label :name %><br />
+        <%= f.text_field :name %>
+      </li>
+      <li>
+        <%= f.label :mtg_format, "Format" %><br />
+        <%= f.select :mtg_format, SearchFields.new().legal_formats,
+            {include_blank: true} %>
+      </li>
+
+      <p><%= f.submit "Create Deck" %></p>
+    <% end %>
+  </ul>
+
 </div>

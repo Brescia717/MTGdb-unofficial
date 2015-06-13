@@ -1,16 +1,18 @@
-<div id="paginator"><%= paginate @cards, remote: true %></div>
-<div id="cards-table">
+<h3><%= "Click on a card to add it to your #{@deck.name} deck" %></h3>
+
+<div id="paginator"><%= paginate @cards_for_deck, remote: true %></div>
+<div id="deck-cards-table">
   <table>
     <tr class="sort">
-      <th><%= sort_link @search, :name, "Name" %></th>
-      <th><%= sort_link @search, :cmc,  "ManaCost" %></th>
+      <th><%= sort_link @card_search_for_library, :name, "Name" %></th>
+      <th><%= sort_link @card_search_for_library, :cmc,  "ManaCost" %></th>
       <th>Type - Subtype</th>
       <th>Rarity</th>
       <th>Text</th>
       <th>Power/Toughness</th>
       <th>CardImage</th>
     </tr>
-    <% @cards.each do |card| %>
+    <% @cards_for_deck.each do |card| %>
       <tr>
         <td>
           <%= link_to card.name, card_multiverseid_path(card.multiverseid) %>
@@ -21,7 +23,7 @@
         <td><%= card.text %></td>
         <td><%= card.power_and_toughness %></td>
         <td>
-          <a href="<%= card_multiverseid_path(card.multiverseid) %>">
+          <a href='<%= "#{deck_path(@deck)}?add=#{card.multiverseid}" %>' data-method="patch" rel="nofollow">
             <img src="<%= card.fetch_image %>" alt="<%= card.name %>" />
           </a>
         </td>
@@ -29,4 +31,4 @@
     <% end %>
   </table>
 </div>
-<div id="paginator"><%= paginate @cards, remote: true %></div>
+<div id="paginator"><%= paginate @cards_for_deck, remote: true %></div>
