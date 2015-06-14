@@ -9,7 +9,10 @@
         <% @deck.library.each do |card_multiverseid| %>
           <img src="<%= "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=#{card_multiverseid}&type=card" %>" alt="<%= "#{card_multiverseid}" %>" />
           <a href='<%= "#{deck_path(@deck)}?delete=#{card_multiverseid}" %>' data-method="patch" rel="nofollow">
-            <button type="button" name="delete">Delete</button>
+            <button type="button" name="delete">-</button>
+          </a>
+          <a href='<%= "#{deck_path(@deck)}?add=#{card_multiverseid}" %>' data-method="patch" rel="nofollow">
+            <button type="button" name="Add">+</button>
           </a>
         <% end %>
       <% end %>
