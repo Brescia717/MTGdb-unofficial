@@ -4,7 +4,6 @@ Rails.application.routes.draw do
   resources  :decks
 
   get '/card/:multiverseid' => 'cards#show', as: 'card_multiverseid'
-  # get '/decks/:id/edit/card_search/:card_search' => 'decks#edit', as: 'card_search'
 
   root 'cards#index'
 

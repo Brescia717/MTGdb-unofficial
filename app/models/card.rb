@@ -32,4 +32,8 @@ class Card < ActiveRecord::Base
   def fetch_image
     "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=#{self.multiverseid}&type=card"
   end
+
+  def self.card_search(name)
+    where("cards.name ILIKE ?", "%#{name}%")
+  end
 end

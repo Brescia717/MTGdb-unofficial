@@ -1,5 +1,10 @@
-<h2><%= "#{@deck.name} edit" %></h2>
-<%# javascript_tag "pagination" %>
-
-<div id="card-search-for-library"><%= render 'card_search_for_library' %><div>
-<div id="cards-for-deck"><%= render 'cards_for_deck' %></div>
+<div class="deck-edit-page">
+  <h2><%= "#{@deck.name} edit" %></h2>
+  <div id="card-search-form">
+    <%= form_tag(edit_deck_path, method: "get") do %>
+      <%= text_field_tag :card_search, params[:card_search], placeholder: "Search for a card" %>
+      <%= submit_tag "Search" %>
+    <% end %>
+  </div>
+  <div id="card-search-results"><%= render 'card_search_results' %></div>
+</div>

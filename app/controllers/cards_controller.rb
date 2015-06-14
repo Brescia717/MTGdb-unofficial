@@ -11,7 +11,7 @@ class CardsController < ApplicationController
     @card.name  = @card.name.gsub(/[+]/, ' ')
   end
 
-  private
+private
 
   def card_params
     params[:card].permit!
