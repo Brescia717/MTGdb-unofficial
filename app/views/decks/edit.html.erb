@@ -14,6 +14,9 @@
         <% end %>
       <% end %>
     </p>
+    <p>
+      <%= link_to "Done", @deck %>
+    </p>
   </div>
   <div id="card-search-form">
     <%= form_tag(edit_deck_path, method: "get") do %>

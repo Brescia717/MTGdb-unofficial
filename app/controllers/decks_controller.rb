@@ -46,7 +46,7 @@ class DecksController < ApplicationController
     else
       render 'edit'
     end
-    redirect_to deck
+    redirect_to edit_deck_path(deck)
   end
 
   def destroy
