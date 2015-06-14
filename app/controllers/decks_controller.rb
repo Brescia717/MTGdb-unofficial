@@ -28,8 +28,6 @@ class DecksController < ApplicationController
   def edit
     @deck = Deck.find(params[:id])
     @deck_cards = @deck.library.map { |multiverseid| Card.find_by(multiverseid: multiverseid) } if @deck.library
-    # @card_search_for_library = Card.ransack(params[:q])
-    # @cards_for_deck = @card_search_for_library.result.page(params[:page]).limit(4)
     if params[:card_search]
       @cards = Card.card_search(params[:card_search]).order("cards.name DESC")
     end
