@@ -5,7 +5,7 @@
   </p>
   <p><strong>Format: </strong><%= @deck.mtg_format %></p>
   <% if @deck.user == current_user %>
-    <%= link_to "Add card", edit_deck_path(@deck) %>
+    <%= link_to "Edit deck", edit_deck_path(@deck) %>
   <% end %>
   <p>
     <strong>Library: </strong><br />
