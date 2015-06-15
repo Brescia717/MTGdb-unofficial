@@ -6,8 +6,11 @@ class DecksController < ApplicationController
   end
 
   def show
-    @deck = Deck.find(params[:id])
-    @user = current_user
+    @deck      = Deck.find(params[:id])
+    @user      = current_user
+    if params[:draw_hand]
+      @draw_hand = Play.new().draw_hand(@deck)
+    end
   end
 
   def new
@@ -15,7 +18,7 @@ class DecksController < ApplicationController
   end
 
   def create
-    @deck = Deck.new(deck_params)
+    @deck      = Deck.new(deck_params)
     @deck.user = current_user
     if @deck.save
       flash[:success] = "New deck created!"
@@ -26,7 +29,7 @@ class DecksController < ApplicationController
   end
 
   def edit
-    @deck = Deck.find(params[:id])
+    @deck       = Deck.find(params[:id])
     @deck_cards = @deck.library.map { |multiverseid| Card.find_by(multiverseid: multiverseid) } if @deck.library
     if params[:card_search]
       @cards = Card.card_search(params[:card_search]).order("cards.name DESC")

@@ -8,18 +8,31 @@
     <%= link_to "Edit deck", edit_deck_path(@deck) %>
   <% end %>
   <p>
-    <strong>Library: </strong><br />
+    <strong>Library: <%= "#{@deck.library.count} cards" %></strong>
+    <div id="draw-hand">
+      <%= form_tag(draw_hand_path, method: "get") do %>
+        <%= submit_tag "Draw hand", name: :draw_hand %>
+      <% end %>
+      <% if @draw_hand %>
+        <% @draw_hand.each do |card_multiverseid| %>
+          <img src="<%= "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=#{card_multiverseid}&type=card" %>" alt="<%= "#{card_multiverseid}" %>" />
+        <% end %>
+      <% end %>
+    </div>
+    <br />
     <% if @deck.library.empty? %>
       No cards found.
     <% else %>
-      <% @deck.library.each do |card_multiverseid| %>
+      <% @deck.library.sort.each do |card_multiverseid| %>
         <img src="<%= "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=#{card_multiverseid}&type=card" %>" alt="<%= "#{card_multiverseid}" %>" />
       <% end %>
     <% end %>
   </p>
-  <br>
-  <% if @deck.user == current_user %>
-    <%= link_to "Delete deck", deck_path(@deck), method: :delete,
-        data: {confirm: "Are you sure you want to delete this deck?"} %>
-  <% end %>
+  <br />
+  <div id="delete-button">
+    <% if @deck.user == current_user %>
+      <%= link_to "Delete deck", deck_path(@deck), method: :delete,
+          data: {confirm: "Are you sure you want to delete this deck?"} %>
+    <% end %>
+  </div>
 </div>

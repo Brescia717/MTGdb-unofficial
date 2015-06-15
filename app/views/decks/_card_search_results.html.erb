@@ -22,11 +22,17 @@
           <td><%= card.text %></td>
           <td><%= card.power_and_toughness %></td>
           <td><img src="<%= card.fetch_image %>" alt="<%= card.name %>" /></td>
-          <td>
-            <a href='<%= "#{deck_path(@deck)}?add=#{card.multiverseid}" %>' data-method="patch" rel="nofollow">
-              <button type="button" name="add">Add</button>
-            </a>
-          </td>
+          <% if @deck.library.count < 60 %>
+            <td>
+              <a href='<%= "#{deck_path(@deck)}?add=#{card.multiverseid}" %>' data-method="patch" rel="nofollow">
+                <button type="button" name="add">Add</button>
+              </a>
+            </td>
+          <% else %>
+            <td>
+              Deck full.
+            </td>
+          <% end %>
         </tr>
       <% end %>
     </table>
