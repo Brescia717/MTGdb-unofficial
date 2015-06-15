@@ -5,6 +5,11 @@ $(function () {
       return false;
     }
   );
+  $('#deck-cards').on('click', 'th a, .pagination a', function () {
+      $.getScript(this.href);
+      return false;
+    }
+  );
 });
 // $(function() {
 //   (function( $ ) {

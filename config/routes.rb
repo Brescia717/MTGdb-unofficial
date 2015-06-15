@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users
   resources  :cards
+  resources  :decks
+
   get '/card/:multiverseid' => 'cards#show', as: 'card_multiverseid'
 
   root 'cards#index'

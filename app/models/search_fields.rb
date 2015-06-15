@@ -1,4 +1,3 @@
-require 'pry'
 class SearchFields
   def types
     Card.select(:types).order('types ASC').uniq.collect.each do |c|
@@ -26,8 +25,8 @@ class SearchFields
       end
     end
     unique_formats = unique_formats.sort.uniq
-    unique_formats.each do |f|
-      [f, f]
+    unique_formats.each do |formats|
+      [formats, formats]
     end
   end
 

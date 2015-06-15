@@ -7,7 +7,7 @@
   </div>
   <div id="card-info-box">
     <hr/>
-    <p><strong>Name: </strong><%= @card.name %></p>
+    <p><strong>Name:  </strong><%= @card.name %></p>
     <p><strong>Types: </strong><%= @card.type_and_subtype %></p>
     <p><strong>Text:  </strong><%= @card.text %></p>
     <% if @card.power_and_toughness %>
@@ -18,8 +18,14 @@
     <% @card.legalities.each do |mtg_format, legality| %>
       <p><%= "#{mtg_format}: #{legality}" %></p>
     <% end %>
+    <br>
     <p>
-      MTGGoldfish Paper Pricing: <a href="<%= @url %>"><%= @card_price %></a>
+      <strong>MTGGoldfish Paper Pricing: </strong>
+      <a href="<%= @url %>"><%= @card_price %></a> - <%= @card_set %>
     </p>
+    <br>
+  </div>
+  <div class="back-button">
+    <p><%= link_to "Back", cards_path %></p>
   </div>
 </div>

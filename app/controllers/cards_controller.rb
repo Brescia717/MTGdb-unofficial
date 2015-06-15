@@ -5,11 +5,13 @@ class CardsController < ApplicationController
   end
 
   def show
-    @card = Card.find_by(multiverseid: params[:multiverseid])
+    @card       = Card.find_by(multiverseid: params[:multiverseid])
     @card_price = get_price(@card)
+    @card_set   = @card.card_set.gsub(/[+]/, ' ')
+    @card.name  = @card.name.gsub(/[+]/, ' ')
   end
 
-  private
+private
 
   def card_params
     params[:card].permit!
@@ -18,19 +20,20 @@ class CardsController < ApplicationController
   def get_price(card)
     set_name_param  = card.card_set if card.card_set
     card_name_param = card.name if card.name
-    replacements    = [ [/\s/, "+"], [/,\s/, ",_"] ]
-    replacements.each {|r| card_name_param.gsub!(r[0], r[1]) }
-    replacements.each {|r| set_name_param.gsub!(r[0], r[1])  }
-    @url = "http://www.mtggoldfish.com/price/#{set_name_param}/#{card_name_param}#online"
+    replacements    = [ [/,\s/, "+"], [/[\']/, ""] ]
+    replacements.each { |r| card_name_param.gsub!(r[0], r[1]) }
+    replacements.each { |r| set_name_param.gsub!(r[0], r[1]) }
+    @url = "http://www.mtggoldfish.com/price/#{CGI.escape(set_name_param)}/#{CGI.escape(card_name_param)}#online"
     uri = URI.parse(@url)
     req = Net::HTTP.new(uri.host, uri.port)
     res = req.request_head(uri.path)
     if (res.code == "200")
       doc = Nokogiri::HTML(open(@url))
-      median_price = doc.at_css('div.price-box.paper div.price-box-price').text
+      paper_price = "$#{doc.at_css('div.price-box.paper div.price-box-price').text}"
     else
-      median_price = '#'
+      paper_price = "Price not found."
+      @url = '#'
     end
-    median_price
+    paper_price
   end
 end

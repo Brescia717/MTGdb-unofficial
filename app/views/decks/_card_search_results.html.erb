@@ -1,0 +1,34 @@
+<% if @cards %>
+  <h3><%= "Click on the add button to add that card to your #{@deck.name} deck" %></h3>
+  <div id="deck-cards-table">
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>ManaCost</th>
+        <th>Type - Subtype</th>
+        <th>Rarity</th>
+        <th>Text</th>
+        <th>Power/Toughness</th>
+        <th>CardImage</th>
+      </tr>
+      <% @cards.each do |card| %>
+        <tr>
+          <td>
+            <%= link_to card.name, card_multiverseid_path(card.multiverseid) %>
+          </td>
+          <td><%= card.mana_cost %></td>
+          <td><%= card.type_and_subtype %></td>
+          <td><%= card.rarity %></td>
+          <td><%= card.text %></td>
+          <td><%= card.power_and_toughness %></td>
+          <td><img src="<%= card.fetch_image %>" alt="<%= card.name %>" /></td>
+          <td>
+            <a href='<%= "#{deck_path(@deck)}?add=#{card.multiverseid}" %>' data-method="patch" rel="nofollow">
+              <button type="button" name="add">Add</button>
+            </a>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+<% end %>

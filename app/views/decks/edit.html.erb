@@ -1,0 +1,29 @@
+<div class="deck-edit-page">
+  <h2><%= "#{@deck.name} edit" %></h2>
+  <div id="deck-library">
+    <p>
+      <strong>Library: </strong><br />
+      <% if @deck.library.empty? %>
+        No cards found.
+      <% else %>
+        <% @deck.library.each do |card_multiverseid| %>
+          <img src="<%= "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=#{card_multiverseid}&type=card" %>" alt="<%= "#{card_multiverseid}" %>" />
+          <a href='<%= "#{deck_path(@deck)}?delete=#{card_multiverseid}" %>' data-method="patch" rel="nofollow">
+            <button type="button" name="delete">-</button>
+          </a>
+          <a href='<%= "#{deck_path(@deck)}?add=#{card_multiverseid}" %>' data-method="patch" rel="nofollow">
+            <button type="button" name="Add">+</button>
+          </a>
+        <% end %>
+      <% end %>
+    </p>
+    <p><%= link_to "Done", @deck %></p>
+  </div>
+  <div id="card-search-form">
+    <%= form_tag(edit_deck_path, method: "get") do %>
+      <%= text_field_tag :card_search, params[:card_search], placeholder: "Search for a card" %>
+      <%= submit_tag "Search" %>
+    <% end %>
+  </div>
+  <div id="card-search-results"><%= render 'card_search_results' %></div>
+</div>

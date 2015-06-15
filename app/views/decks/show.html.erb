@@ -1,0 +1,25 @@
+<div class="container">
+  <p>
+    <strong>Deck name: </strong><%= @deck.name %> -
+    <strong>Created by: </strong><%= @deck.user_tag %>
+  </p>
+  <p><strong>Format: </strong><%= @deck.mtg_format %></p>
+  <% if @deck.user == current_user %>
+    <%= link_to "Edit deck", edit_deck_path(@deck) %>
+  <% end %>
+  <p>
+    <strong>Library: </strong><br />
+    <% if @deck.library.empty? %>
+      No cards found.
+    <% else %>
+      <% @deck.library.each do |card_multiverseid| %>
+        <img src="<%= "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=#{card_multiverseid}&type=card" %>" alt="<%= "#{card_multiverseid}" %>" />
+      <% end %>
+    <% end %>
+  </p>
+  <br>
+  <% if @deck.user == current_user %>
+    <%= link_to "Delete deck", deck_path(@deck), method: :delete,
+        data: {confirm: "Are you sure you want to delete this deck?"} %>
+  <% end %>
+</div>
