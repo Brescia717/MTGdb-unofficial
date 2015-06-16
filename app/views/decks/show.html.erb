@@ -1,34 +1,42 @@
 <div class="container">
-  <p>
-    <strong>Deck name: </strong><%= @deck.name %> -
-    <strong>Created by: </strong><%= @deck.user_tag %>
-  </p>
-  <p><strong>Format: </strong><%= @deck.mtg_format %></p>
-  <% if @deck.user == current_user %>
-    <%= link_to "Edit deck", edit_deck_path(@deck) %>
-  <% end %>
-  <p>
-    <strong>Library: <%= "#{@deck.library.count} cards" %></strong>
-    <div id="draw-hand">
-      <%= form_tag(draw_hand_path, method: "get") do %>
-        <%= submit_tag "Draw hand", name: :draw_hand %>
+  <div id="deck-show-header">
+    <p>
+      <strong>Deck name: </strong><%= @deck.name %> -
+      <strong>Created by: </strong><%= @deck.user_tag %>
+    </p>
+    <p><strong>Format: </strong><%= @deck.mtg_format %></p>
+    <% if @deck.user == current_user %>
+      <%= link_to "Edit deck", edit_deck_path(@deck) %>
+    <% end %>
+    <hr>
+  </div>
+
+  <div id="draw-hand">
+    <%= form_tag(draw_hand_path, method: "get") do %>
+      <%= submit_tag "Draw hand", name: :draw_hand %>
+    <% end %>
+    <% if @draw_hand %>
+      <p><strong><%= "Hand: #{@draw_hand.count} cards" %></strong></p>
+      <% @draw_hand.each do |card_multiverseid| %>
+        <img src="<%= "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=#{card_multiverseid}&type=card" %>" alt="<%= "#{card_multiverseid}" %>" />
       <% end %>
-      <% if @draw_hand %>
-        <% @draw_hand.each do |card_multiverseid| %>
+      <hr />
+    <% end %>
+  </div>
+  <br />
+  <div id="deck-show-library">
+    <p>
+      <strong><%= "Library: #{@deck.library.count} cards" %></strong><br>
+      <% if @deck.library.empty? %>
+        No cards found.
+      <% else %>
+        <% @deck.library.sort.each do |card_multiverseid| %>
           <img src="<%= "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=#{card_multiverseid}&type=card" %>" alt="<%= "#{card_multiverseid}" %>" />
         <% end %>
       <% end %>
-    </div>
+    </p>
     <br />
-    <% if @deck.library.empty? %>
-      No cards found.
-    <% else %>
-      <% @deck.library.sort.each do |card_multiverseid| %>
-        <img src="<%= "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=#{card_multiverseid}&type=card" %>" alt="<%= "#{card_multiverseid}" %>" />
-      <% end %>
-    <% end %>
-  </p>
-  <br />
+  </div>
   <div id="delete-button">
     <% if @deck.user == current_user %>
       <%= link_to "Delete deck", deck_path(@deck), method: :delete,
