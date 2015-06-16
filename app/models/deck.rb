@@ -1,9 +1,6 @@
 class Deck < ActiveRecord::Base
   belongs_to :user
   has_many   :cards
-  # accepts_nested_attributes_for :cards,
-  #   reject_if: lambda { |a| a[:library].blank? },
-  #   allow_destroy: true
 
   validates :name,
     presence: true,
