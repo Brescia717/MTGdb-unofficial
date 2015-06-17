@@ -11,6 +11,9 @@ class DecksController < ApplicationController
     if params[:draw_hand]
       @draw_hand = Play.new().draw_hand(@deck)
     end
+    if params[:game]
+      redirect_to games_path(@deck)
+    end
   end
 
   def new
@@ -39,7 +42,7 @@ class DecksController < ApplicationController
   def update
     deck = Deck.find(params[:id])
     if edit_deck_params[:add]
-      card = [edit_deck_params[:add].to_i]
+      card    = [edit_deck_params[:add].to_i]
       library = deck.library + card
       deck.update(library: library)
       flash[:success] = "A copy of #{Card.find_by(multiverseid: edit_deck_params[:add]).name} has been added to your deck."
