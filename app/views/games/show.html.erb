@@ -1,6 +1,41 @@
-<div id="zones">
+<div id="zones" class="row">
   <h1><%= @deck.name %></h1>
-  <div id="battlefield">
+  <div id="side-bar" class="medium-2 columns">
+    <div id="deck">
+      <div id="library">
+        [ Library ]
+      </div>
+      <div id="graveyard">
+        [ Graveyard placeholder ]
+      </div>
+      <div id="exile">
+        [ Exile placeholder ]
+      </div>
+    </div>
+    <div id="counters">
+      <div id="life">
+        Life: [ 20/20 ]
+      </div>
+      <div id="poison">
+        Poison: [ 0 ]
+      </div>
+      <div id="mana-pool">
+        <div id="green">[ G ]</div>
+        <div id="white">[ W ]</div>
+        <div id="blue">[ U ]</div>
+        <div id="black">[ B ]</div>
+        <div id="red">[ R ]</div>
+        <div id="colorless">[ X ]</div>
+      </div>
+    </div>
+  </div>
+  <div id="in-play-bar" class="medium-1 columns">
+    .
+    <div id="play">
+
+    </div>
+  </div>
+  <div id="battlefield" class="medium-9 columns">
     .
     <div id="creatures">
       <div></div>
@@ -22,36 +57,7 @@
 
     </div>
   </div>
-  <div id="side-bar">
-    <div id="deck">
-      <div id="library">
-
-      </div>
-      <div id="graveyard">
-
-      </div>
-      <div id="exile">
-
-      </div>
-    </div>
-    <div id="counters">
-      <div id="mana-pool">
-        <div id="green"></div>
-        <div id="white"></div>
-        <div id="blue"></div>
-        <div id="black"></div>
-        <div id="red"></div>
-        <div id="colorless"></div>
-      </div>
-      <div id="life">
-
-      </div>
-      <div id="poison">
-
-      </div>
-    </div>
-  </div>
-  <div id="bottom-bar">
+  <div class="medium-9 columns" id="bottom-bar">
     .
     <div id="land">
 
@@ -60,10 +66,5 @@
 
     </div>
   </div>
-  <div id="in-play-bar">
-    .
-    <div id="play">
 
-    </div>
-  </div>
 </div>
