@@ -14,7 +14,6 @@
     <% if current_user %>
       <%= link_to "Test deck", new_game_path %>
     <% end %>
-    
   </div>
   <div id="draw-hand">
     <%= form_tag(draw_hand_path, method: "get") do %>

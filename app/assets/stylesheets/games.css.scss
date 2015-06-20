@@ -1,0 +1,27 @@
+
+#zones {
+  #battlefield {
+    background-color: green;
+    color: green;
+    margin-left: 350px;
+    padding: 175px;
+    z-index: 1;
+  }
+  #bottom-bar {
+    background-color: blue;
+    color: blue;
+    margin-left: 350px;
+    padding: 68px;
+    z-index: 2;
+  }
+  #in-play-bar {
+    background-color: red;
+    color: red;
+    margin-right: 930px;
+    padding-bottom: 504px;
+    position: relative;
+    z-index: 3;
+    top: -522px;
+    left: 5px;
+  }
+}
