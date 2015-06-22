@@ -4,8 +4,7 @@
     <%= form_tag(edit_deck_path, method: "get") do %>
       <%= text_field_tag :card_search, params[:card_search],
                         placeholder: "Search for a card",
-                        id: "card_search",
-                        data: {autocomplete_source: card_names_path} %>
+                        id: "card_search" %>
       <%= submit_tag "Search", class: "button tiny" %>
     <% end %>
   </div>

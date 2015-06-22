@@ -3,7 +3,7 @@
   <%= search_form_for @search, remote: true do |f| %>
     <div class="field">
       <%= f.label :name_cont, "Name" %>
-      <%= f.text_field :name_cont %>
+      <%= f.text_field :name_cont, id: "cards_autocomplete_name" %>
       <%= f.label :cmc_gteq, "CMC" %>
       <%= f.select :cmc_gteq, 0..20, {include_blank: ""} %>
       <%= f.label :cmc_lteq, "<=>" %>

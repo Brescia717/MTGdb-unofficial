@@ -37,10 +37,6 @@ class DecksController < ApplicationController
     if params[:card_search]
       @cards = Card.card_search(params[:card_search]).order("cards.name DESC")
     end
-    if params[:term]
-      @card_names = Card.order(:name).where("name ILIKE ?", "%#{params[:term]}%")
-      render json: @card_names.map(&:name)
-    end
   end
 
   def update

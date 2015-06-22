@@ -2,10 +2,10 @@ Rails.application.routes.draw do
   devise_for :users
   resources  :cards
   resources  :decks
+  resources  :search_suggestions
 
   get '/card/:multiverseid'      => 'cards#show',  as: 'card_multiverseid'
   get '/decks/:id/hand'          => 'decks#show',  as: 'draw_hand'
-  get '/decks/:id/autocomplete'  => 'decks#edit',  as: 'card_names'
   get '/decks/:id/game'          => 'games#show',  as: 'new_game'
 
   root 'cards#index'

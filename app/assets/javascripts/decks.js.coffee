@@ -1,3 +1,3 @@
 jQuery ->
   $('#card_search').autocomplete
-    source: $('#card_search').data('autocomplete-source')
+    source: "/search_suggestions"
