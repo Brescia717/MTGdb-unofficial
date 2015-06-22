@@ -30,3 +30,25 @@
     bottom: 300px;
   }
 }
+
+#card-image {
+    position: relative;
+    transition: 0.5s fast;
+    -webkit-transition: 0.5s fast;
+    -moz-transition: 0.5s fast;
+
+  &:hover {
+    -webkit-transform: scale(4,4);
+    -moz-transform: scale(4,4);
+    z-index: 1;
+    padding-right: 25px;
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+}
+
+.search-form {
+  padding-right: 30px;
+  padding-left: 30px;  
+}

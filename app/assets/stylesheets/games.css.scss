@@ -1,35 +1,18 @@
-
 #zones {
   #battlefield {
     background-color: green;
-    /* color: green; */
     height: 330px;
-    /* margin-left: 350px;
-    padding: 175px;
-    z-index: 1; */
   }
   #bottom-bar {
     background-color: blue;
-    /* color: blue; */
     height: 100px;
-    /* margin-left: 350px;
-    padding: 68px;
-    z-index: 2; */
   }
   #side-bar {
     background-color: purple;
     height: 430px;
-    /* color: purple; */
   }
   #in-play-bar {
     background-color: red;
-    /* color: red; */
     height: 430px;
-    /* margin-right: 930px;
-    padding-bottom: 504px;
-    position: relative;
-    z-index: 3;
-    top: -522px;
-    left: 5px; */
   }
 }

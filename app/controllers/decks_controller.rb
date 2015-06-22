@@ -7,12 +7,11 @@ class DecksController < ApplicationController
 
   def show
     @deck      = Deck.find(params[:id])
+    @deck_data = @deck.deck_data
+    @card_data = fetch_card_data(@deck_data)
     @user      = current_user
     if params[:draw_hand]
       @draw_hand = Play.new().draw_hand(@deck)
-    end
-    if params[:game]
-      redirect_to games_path(@deck)
     end
   end
 
@@ -34,8 +33,13 @@ class DecksController < ApplicationController
   def edit
     @deck       = Deck.find(params[:id])
     @deck_cards = @deck.library.map { |multiverseid| Card.find_by(multiverseid: multiverseid) } if @deck.library
+    @deck_data  = @deck.deck_data
     if params[:card_search]
       @cards = Card.card_search(params[:card_search]).order("cards.name DESC")
+    end
+    if params[:term]
+      @card_names = Card.order(:name).where("name ILIKE ?", "%#{params[:term]}%")
+      render json: @card_names.map(&:name)
     end
   end
 
@@ -55,7 +59,7 @@ class DecksController < ApplicationController
     else
       render 'edit'
     end
-    redirect_to edit_deck_path(deck)
+    redirect_to edit_deck_path
   end
 
   def destroy
@@ -66,6 +70,48 @@ class DecksController < ApplicationController
     end
   end
 
+  def fetch_card_data(deck_data)
+    card_data = []
+    deck_data.each do |c|
+      card_data << {
+        name:         c[:card][:name],
+        multiverseid: c[:card][:multiverseid],
+        types:        c[:card][:types],
+        index:        c[:index]
+      }
+    end
+    @lands        = []
+    @creatures    = []
+    @instants     = []
+    @sorceries    = []
+    @artifacts    = []
+    @enchantments = []
+    card_data.each do |card|
+      if card[:types].include?("Land")
+        @lands << card[:name]
+      elsif card[:types].include?("Creature") || card[:types].include?("Summon")
+        @creatures << card[:name]
+      elsif card[:types].include?("Instant") || card[:types].include?("Interrupt")
+        @instants << card[:name]
+      elsif card[:types].include?("Sorcery")
+        @sorceries << card[:name]
+      elsif card[:types].include?("Artifact")
+        @artifacts << card[:name]
+      elsif card[:types].include?("Enchantment")
+        @enchantments << card[:name]
+      end
+    end
+    @lands        = @lands.each_with_object(Hash.new(0)) { |card,counts| counts[card] += 1 }
+    @creatures    = @creatures.each_with_object(Hash.new(0)) { |card,counts| counts[card] += 1 }
+    @instants     = @instants.each_with_object(Hash.new(0)) { |card,counts| counts[card] += 1 }
+    @sorceries    = @sorceries.each_with_object(Hash.new(0)) { |card,counts| counts[card] += 1 }
+    @artifacts    = @artifacts.each_with_object(Hash.new(0)) { |card,counts| counts[card] += 1 }
+    @enchantments = @enchantments.each_with_object(Hash.new(0)) { |card,counts| counts[card] += 1 }
+
+    card_data
+  end
+
+
 private
 
   def deck_params
@@ -74,9 +120,5 @@ private
 
   def edit_deck_params
     params.permit(:add, :delete)
-  end
-
-  def card_params
-    params.permit(:multiverseid, :set_code, :rarity, :cmc, :colors, :name, :types, :subtypes, :text, :artist)
   end
 end

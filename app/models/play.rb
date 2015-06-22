@@ -12,6 +12,4 @@ class Play
     @hand
   end
 
-  def self.draw_card
-  end
 end

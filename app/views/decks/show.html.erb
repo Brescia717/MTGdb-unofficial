@@ -1,4 +1,4 @@
-<div class="container">
+<div class="deck-show">
   <div id="deck-show-header">
     <p>
       <strong>Deck name: </strong><%= @deck.name %> -
@@ -6,23 +6,23 @@
     </p>
     <p><strong>Format: </strong><%= @deck.mtg_format %></p>
     <% if @deck.user == current_user %>
-      <%= link_to "Edit deck", edit_deck_path(@deck) %>
+      <%= link_to "Edit deck", edit_deck_path(@deck), class: "button tiny" %>
     <% end %>
     <hr>
   </div>
   <div class="new-game">
     <% if current_user %>
-      <%= link_to "Test deck", new_game_path %>
+      <%= link_to "Test deck", new_game_path, class: "button tiny" %>
     <% end %>
   </div>
   <div id="draw-hand">
     <%= form_tag(draw_hand_path, method: "get") do %>
-      <%= submit_tag "Draw hand", name: :draw_hand %>
+      <%= submit_tag "Draw hand", name: :draw_hand, class: "button tiny" %>
     <% end %>
     <% if @draw_hand %>
       <p><strong><%= "Hand: #{@draw_hand.count} cards" %></strong></p>
       <% @draw_hand.each do |card_multiverseid| %>
-        <img src="<%= "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=#{card_multiverseid}&type=card" %>" alt="<%= "#{card_multiverseid}" %>" />
+        <%= image_tag("http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=#{card_multiverseid}&type=card", alt: "#{card_multiverseid}", height: "12.5%", width: "12.5%", id: "draw-hand-images") %>
       <% end %>
       <hr />
     <% end %>
@@ -34,8 +34,8 @@
       <% if @deck.library.empty? %>
         No cards found.
       <% else %>
-        <% @deck.library.sort.each do |card_multiverseid| %>
-          <img src="<%= "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=#{card_multiverseid}&type=card" %>" alt="<%= "#{card_multiverseid}" %>" />
+        <% @card_data.each do |card| %>
+            <%= image_tag("http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=#{card[:multiverseid]}&type=card", alt: "#{card[:multiverseid]}") %>
         <% end %>
       <% end %>
     </p>
@@ -44,7 +44,8 @@
   <div id="delete-button">
     <% if @deck.user == current_user %>
       <%= link_to "Delete deck", deck_path(@deck), method: :delete,
-          data: {confirm: "Are you sure you want to delete this deck?"} %>
+          data: {confirm: "Are you sure you want to delete this deck?"},
+          class: "button tiny" %>
     <% end %>
   </div>
 </div>

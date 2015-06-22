@@ -1,31 +1,33 @@
 <!-- form from ransack gem -->
-<%= search_form_for @search, remote: true do |f| %>
-  <div class="field">
-    <%= f.label :name_cont, "Name" %>
-    <%= f.text_field :name_cont %>
-    <%= f.label :cmc_gteq, "CMC" %>
-    <%= f.select :cmc_gteq, 0..20, {include_blank: ""} %>
-    <%= f.label :cmc_lteq, "<=>" %>
-    <%= f.select :cmc_lteq, 0..20, {include_blank: ""} %>
-    <%= f.label :colors_cont, "Colors" %>
-    <%= f.select :colors_cont, SearchFields.new().colors, {include_blank: true} %>
-    <%= f.label :types_cont, "Type" %>
-    <%= f.select :types_cont, SearchFields.new().types, {include_blank: true} %>
-    <%= f.label :subtypes_cont, "Subtype" %>
-    <%= f.text_field :subtypes_cont %>
-    <%= f.label :power_eq, "Power" %>
-    <%= f.select :power_eq, 0..20, {include_blank: ""} %>
-    <%= f.label :toughness_eq, "Toughness" %>
-    <%= f.select :toughness_eq, 0..20, {include_blank: ""} %>
-    <%= f.label "Set" %>
-    <%= f.hidden_field :printings_cont %>
-    <%= f.text_field :printings_cont %><br>
-    <%= f.label :legalities_cont, "Format" %>
-    <%= f.select :legalities_cont, SearchFields.new().legal_formats, {include_blank: true} %>
-  </div>
-  <div class="actions">
-    <%= f.submit "Search" %><br>
-    <%= link_to "Clear Search", request.path, class:"cancel-button" %>
-  </div>
-<% end %>
-<hr/>
+<div class="search-form">
+  <%= search_form_for @search, remote: true do |f| %>
+    <div class="field">
+      <%= f.label :name_cont, "Name" %>
+      <%= f.text_field :name_cont %>
+      <%= f.label :cmc_gteq, "CMC" %>
+      <%= f.select :cmc_gteq, 0..20, {include_blank: ""} %>
+      <%= f.label :cmc_lteq, "<=>" %>
+      <%= f.select :cmc_lteq, 0..20, {include_blank: ""} %>
+      <%= f.label :colors_cont, "Colors" %>
+      <%= f.select :colors_cont, SearchFields.new().colors, {include_blank: true} %>
+      <%= f.label :types_cont, "Type" %>
+      <%= f.select :types_cont, SearchFields.new().types, {include_blank: true} %>
+      <%= f.label :subtypes_cont, "Subtype" %>
+      <%= f.text_field :subtypes_cont %>
+      <%= f.label :power_eq, "Power" %>
+      <%= f.select :power_eq, 0..20, {include_blank: ""} %>
+      <%= f.label :toughness_eq, "Toughness" %>
+      <%= f.select :toughness_eq, 0..20, {include_blank: ""} %>
+      <%= f.label "Set" %>
+      <%= f.hidden_field :printings_cont %>
+      <%= f.text_field :printings_cont %><br>
+      <%= f.label :legalities_cont, "Format" %>
+      <%= f.select :legalities_cont, SearchFields.new().legal_formats, {include_blank: true} %>
+    </div>
+    <div class="actions">
+      <%= f.submit "Search" %><br>
+      <%= link_to "Clear Search", request.path, class:"cancel-button" %>
+    </div>
+  <% end %>
+  <hr/>
+</div>

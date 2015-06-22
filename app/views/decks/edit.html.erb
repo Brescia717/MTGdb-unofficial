@@ -1,5 +1,15 @@
 <div class="deck-edit-page">
   <h2><%= "#{@deck.name} edit" %></h2>
+  <div id="card-search-form">
+    <%= form_tag(edit_deck_path, method: "get") do %>
+      <%= text_field_tag :card_search, params[:card_search],
+                        placeholder: "Search for a card",
+                        id: "card_search",
+                        data: {autocomplete_source: card_names_path} %>
+      <%= submit_tag "Search", class: "button tiny" %>
+    <% end %>
+  </div>
+  <div id="card-search-results"><%= render 'card_search_results' %></div>
   <div id="deck-library">
     <p>
       <strong>Library: - <%= "#{@deck.library.count} cards" %></strong><br />
@@ -10,22 +20,15 @@
           <img src="<%= "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=#{card_multiverseid}&type=card" %>" alt="<%= "#{card_multiverseid}" %>" />
           <% if @deck.library.count < 60 %>
             <a href='<%= "#{deck_path(@deck)}?add=#{card_multiverseid}" %>' data-method="patch" rel="nofollow">
-              <button type="button" name="add"> + </button>
+              <button class="tiny" type="button" name="add"> + </button>
             </a>
           <% end %>
           <a href='<%= "#{deck_path(@deck)}?delete=#{card_multiverseid}" %>' data-method="patch" rel="nofollow">
-            <button type="button" name="delete"> - </button>
+            <button class="tiny" type="button" name="delete"> - </button>
           </a>
         <% end %>
       <% end %>
     </p>
     <p><%= link_to "Done", @deck %></p>
   </div>
-  <div id="card-search-form">
-    <%= form_tag(edit_deck_path, method: "get") do %>
-      <%= text_field_tag :card_search, params[:card_search], placeholder: "Search for a card" %>
-      <%= submit_tag "Search" %>
-    <% end %>
-  </div>
-  <div id="card-search-results"><%= render 'card_search_results' %></div>
 </div>

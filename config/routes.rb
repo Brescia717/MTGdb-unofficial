@@ -3,9 +3,10 @@ Rails.application.routes.draw do
   resources  :cards
   resources  :decks
 
-  get '/card/:multiverseid' => 'cards#show', as: 'card_multiverseid'
-  get '/decks/:id/hand' => 'decks#show', as: 'draw_hand'
-  get '/decks/:id/game' => 'games#show', as: 'new_game'
+  get '/card/:multiverseid'      => 'cards#show',  as: 'card_multiverseid'
+  get '/decks/:id/hand'          => 'decks#show',  as: 'draw_hand'
+  get '/decks/:id/autocomplete'  => 'decks#edit',  as: 'card_names'
+  get '/decks/:id/game'          => 'games#show',  as: 'new_game'
 
   root 'cards#index'
 
