@@ -47,8 +47,15 @@
     -moz-opacity: 1;
   }
 }
-
 .search-form {
-  padding-right: 30px;
-  padding-left: 30px;  
+  padding-right: 75%;
+  padding-left: 30px;
+}
+
+.card-index {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+.hidden {
+  display: none;
 }

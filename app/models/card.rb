@@ -8,7 +8,7 @@ class Card < ActiveRecord::Base
   serialize :legalities, JSON
   serialize :printings, JSON
 
-  paginates_per 15
+  paginates_per 10
 
   def type
     "#{self.types.delete('[","]')}" if self.types
