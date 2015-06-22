@@ -3,8 +3,8 @@
   <%= search_form_for @search, remote: true do |f| %>
     <div class="field">
       <%= f.label :name_cont, "Name" %>
-      <%= f.text_field :name_cont, id: "cards_autocomplete_name" %><button type="button" name="advanced_options" id="adv_opts" class="button">Adv Opts</button>
-      <span class="hidden">
+      <%= f.text_field :name_cont, id: "cards_autocomplete_name" %>
+      <p class="hidden">
         <%= f.label :cmc_gteq, "CMC min" %>
         <%= f.select :cmc_gteq, 0..20, {include_blank: ""} %>
         <%= f.label :cmc_lteq, "CMC max" %>
@@ -21,13 +21,14 @@
         <%= f.select :toughness_eq, 0..20, {include_blank: ""} %>
         <%= f.label "Set" %>
         <%= f.hidden_field :printings_cont %>
-        <%= f.text_field :printings_cont %><br>
+        <%= f.text_field :printings_cont %>
         <%= f.label :legalities_cont, "Format" %>
         <%= f.select :legalities_cont, SearchFields.new().legal_formats, {include_blank: true} %>
-    </span>
+    </p>
     </div>
     <div class="actions">
       <%= f.submit "Search", class: "button tiny" %>
+      <%= link_to "Advanced Search", '#', class: "button tiny", id: "adv_opts" %>
       <%= link_to "Clear Search", request.path, class:"button tiny cancel-button" %>
     </div>
   <% end %>

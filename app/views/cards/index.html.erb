@@ -3,5 +3,5 @@
   <%= javascript_tag "pagination" %>
 
   <div id="search"><%= render "search" %></div>
-  <div id="cards" ><%= render "cards"  %></div>
+  <div id="cards" ><%= render "cards" if @cards %></div>
 </div>
