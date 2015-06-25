@@ -1,3 +1,7 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+jQuery ->
+  $('#cards_autocomplete_name').autocomplete
+    source: "/search_suggestions"
+  $('span').hidden
+  $('#adv_opts').click ->
+      $('p').toggle 'slow'
+      return

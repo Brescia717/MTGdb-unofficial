@@ -1,0 +1,6 @@
+<%= form_tag(decks_path, method: "get") do %>
+  <%= text_field_tag :deck_search, params[:deck_search],
+                    placeholder: "Search for a deck",
+                    id: "deck_search" %>
+  <%= submit_tag "Search", class: "button tiny" %>
+<% end %>

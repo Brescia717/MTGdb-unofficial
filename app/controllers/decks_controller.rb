@@ -2,7 +2,10 @@ class DecksController < ApplicationController
   before_action :authenticate_user!, except: :index
 
   def index
-    @decks = Deck.all
+    @decks = Deck.order(:updated_at).page(params[:page])
+    @deck_search_results = Deck.deck_search(params[:deck_search])
+                            .order("name DESC")
+                            .page(params[:page]) if params[:deck_search]
   end
 
   def show
@@ -31,30 +34,39 @@ class DecksController < ApplicationController
   end
 
   def edit
-    @deck       = Deck.find(params[:id])
-    @deck_cards = @deck.library.map { |multiverseid| Card.find_by(multiverseid: multiverseid) } if @deck.library
-    @deck_data  = @deck.deck_data
+    @deck         = Deck.find(params[:id])
+    @deck_cards   = @deck.library.map { |multiverseid| Card.find_by(multiverseid: multiverseid) } if @deck.library
+    @basic_lands  = [2774, 294, 2770, 293, 277, 2742, 2766, 290, 2749, 289]
+    @lib_quantity = @deck.library.sort.each_with_object(Hash.new(0)) { |mult_id, counts| counts[mult_id] += 1 }
     if params[:card_search]
       @cards = Card.card_search(params[:card_search]).order("cards.name DESC")
     end
   end
 
   def update
-    deck = Deck.find(params[:id])
+    @deck = Deck.find(params[:id])
     if edit_deck_params[:add]
       card    = [edit_deck_params[:add].to_i]
-      library = deck.library + card
-      deck.update(library: library)
+      library = @deck.library + card
+      @deck.update(library: library)
       flash[:success] = "A copy of #{Card.find_by(multiverseid: edit_deck_params[:add]).name} has been added to your deck."
     elsif edit_deck_params[:delete]
       card    = edit_deck_params[:delete].to_i
-      library = deck.library
+      library = @deck.library
       library.delete_at library.index(card) unless library.index(card).nil?
-      deck.update(library: library)
+      @deck.update(library: library)
       flash[:notice] = "A copy of #{Card.find_by(multiverseid: edit_deck_params[:delete]).name} has been removed from your deck."
-    else
-      render 'edit'
+    elsif edit_deck_params[:remove_all]
+      card    = edit_deck_params[:remove_all].to_i
+      library = @deck.library
+      library.delete(card) unless library.index(card).nil?
+      @deck.update(library: library)
+    elsif edit_deck_params[:add_playset]
+      card = [edit_deck_params[:add_playset].to_i]
+      library =  @deck.library + card * 4
+      @deck.update(library: library)
     end
+    @deck.update(deck_params)
     redirect_to edit_deck_path
   end
 
@@ -111,10 +123,10 @@ class DecksController < ApplicationController
 private
 
   def deck_params
-    params.require(:deck).permit(:name, :mtg_format, :library)
+    params.permit(:name, :mtg_format, :library)
   end
 
   def edit_deck_params
-    params.permit(:add, :delete)
+    params.permit(:add, :delete, :remove_all, :add_playset)
   end
 end

@@ -15,6 +15,8 @@ class Deck < ActiveRecord::Base
 
   serialize :library, JSON
 
+  paginates_per 12
+
   def user_tag
     self.user.email.gsub(/@+\w+.+\z/, '')
   end
@@ -37,5 +39,9 @@ class Deck < ActiveRecord::Base
       end
     end
     deck_data
+  end
+
+  def self.deck_search(name)
+    where('name ILIKE ?', "%#{name}%")
   end
 end

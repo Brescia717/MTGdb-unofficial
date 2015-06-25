@@ -19,8 +19,14 @@
   }
 }
 .deck-edit-page {
-  padding-left: 15px;
-  padding-right: 15px;
+  padding-left: 2%;
+  padding-right: 2%;
+
+  #deck-library {
+    a {
+      padding-right: 50px;
+    }
+  }
 }
 #deck-cards-table {
   td > img {
@@ -38,4 +44,10 @@
       -moz-opacity: 1;
     }
   }
+}
+.deck-index {
+  padding: 2%;
+}
+.deck-new {
+  padding: 2%;
 }

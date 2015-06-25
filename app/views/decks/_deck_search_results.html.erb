@@ -1,0 +1,17 @@
+<% if @deck_search_results %>
+  <div id="paginator"><%= paginate @deck_search_results %></div>
+  <div id="decks-table">
+    <table>
+      <tr>
+        <th>Name</th>
+      </tr>
+      <% @deck_search_results.each do |deck| %>
+        <tr>
+          <td>
+            <%= link_to deck.name, decks_path(deck) %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+<% end %>

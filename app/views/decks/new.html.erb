@@ -1,4 +1,4 @@
-<div>
+<div class="deck-new">
   <h1>New Deck</h1>
   <% if @deck.errors.any? %>
     <ul>
@@ -8,20 +8,13 @@
     </ul>
     <hr>
   <% end %>
-  <ul>
-    <%= form_for @deck do |f| %>
-      <li>
-        <%= f.label :name %><br />
-        <%= f.text_field :name %>
-      </li>
-      <li>
-        <%= f.label :mtg_format, "Format" %><br />
-        <%= f.select :mtg_format, SearchFields.new().legal_formats,
-            {include_blank: true} %>
-      </li>
+  <%= form_for @deck do |f| %>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+    <%= f.label :mtg_format, "Format" %><br />
+    <%= f.select :mtg_format, SearchFields.new().legal_formats,
+        {include_blank: true} %>
 
-      <p><%= f.submit "Create Deck" %></p>
-    <% end %>
-  </ul>
-
+    <p><%= f.submit "Create Deck" %></p>
+  <% end %>
 </div>

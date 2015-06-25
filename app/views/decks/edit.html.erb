@@ -1,5 +1,10 @@
 <div class="deck-edit-page">
   <h2><%= "#{@deck.name} edit" %></h2>
+  <%= form_for @deck do |f| %>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+    <%= f.submit "Save", class: "button tiny" %>
+  <% end %>
   <div id="card-search-form">
     <%= form_tag(edit_deck_path, method: "get") do %>
       <%= text_field_tag :card_search, params[:card_search],
@@ -13,21 +18,39 @@
     <p>
       <strong>Library: - <%= "#{@deck.library.count} cards" %></strong><br />
       <% if @deck.library.empty? %>
-        No cards found.
+        <p>No cards found.</p>
       <% else %>
-        <% @deck.library.sort.each do |card_multiverseid| %>
-          <img src="<%= "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=#{card_multiverseid}&type=card" %>" alt="<%= "#{card_multiverseid}" %>" />
-          <% if @deck.library.count < 60 %>
-            <a href='<%= "#{deck_path(@deck)}?add=#{card_multiverseid}" %>' data-method="patch" rel="nofollow">
-              <button class="tiny" type="button" name="add"> + </button>
-            </a>
+        <ul class="small-block-grid-5">
+          <% @lib_quantity.each do |card_multiverseid, quantity| %>
+            <li>
+              <span>Copies: <%= quantity %></span>
+              <img src="<%= "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=#{card_multiverseid}&type=card" %>" alt="<%= "#{card_multiverseid}" %>" />
+              <div class="button-bar">
+                <ul class="button-group radius even-3">
+                  <% if @deck.library.count < 60 && (@basic_lands.any? { |basic| card_multiverseid == basic } || quantity < 4) %>
+                    <li>
+                      <a href='<%= "#{deck_path(@deck)}?add=#{card_multiverseid}" %>' data-method="patch" rel="nofollow" class="button tiny">
+                        +1
+                      </a>
+                    </li>
+                  <% end %>
+                  <li>
+                    <a href='<%= "#{deck_path(@deck)}?delete=#{card_multiverseid}" %>' data-method="patch" rel="nofollow" class="button tiny">
+                      -1
+                    </a>
+                  </li>
+                  <li>
+                    <a href='<%= "#{deck_path(@deck)}?remove_all=#{card_multiverseid}" %>' data-method="patch" rel="nofollow" class="button tiny">
+                      Remove
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
           <% end %>
-          <a href='<%= "#{deck_path(@deck)}?delete=#{card_multiverseid}" %>' data-method="patch" rel="nofollow">
-            <button class="tiny" type="button" name="delete"> - </button>
-          </a>
-        <% end %>
+        </ul>
       <% end %>
     </p>
-    <p><%= link_to "Done", @deck %></p>
   </div>
+  <p><%= link_to "Done", @deck, class: "button tiny" %></p>
 </div>
