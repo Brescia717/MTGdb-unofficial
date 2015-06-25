@@ -21,8 +21,8 @@
     <% end %>
     <% if @draw_hand %>
       <p><strong><%= "Hand: #{@draw_hand.count} cards" %></strong></p>
-      <% @draw_hand.each do |card_multiverseid| %>
-        <%= image_tag("http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=#{card_multiverseid}&type=card", alt: "#{card_multiverseid}", height: "12.5%", width: "12.5%", id: "draw-hand-images") %>
+      <% @draw_hand.each do |c| %>
+        <%= image_tag("http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=#{c[:card][:multiverseid]}&type=card", alt: "#{c[:card][:multiverseid]}", height: "12.5%", width: "12.5%", id: "draw-hand-images") %>
       <% end %>
       <hr />
     <% end %>

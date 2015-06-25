@@ -5,14 +5,20 @@
   }
   #bottom-bar {
     background-color: blue;
-    height: 100px;
+    /* width: 75%; */
+    box-sizing: border-box;
+    #hand {
+      background-color: blue;
+      position: center;
+
+    }
   }
   #side-bar {
     background-color: purple;
-    height: 430px;
+    height: 455px;
   }
   #in-play-bar {
     background-color: red;
-    height: 430px;
+    height: 455px;
   }
 }

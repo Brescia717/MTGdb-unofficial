@@ -4,7 +4,9 @@ class GamesController < ApplicationController
 
   def show
     @deck      = Deck.find(params[:id])
-    @deck_data = @deck.deck_data
+    @library   = @deck.deck_data
+    @hand    ||= []
+    @game      = Game.new(@library, @hand)
+    @starting_hand = @game.mulligan.hand
   end
-
 end

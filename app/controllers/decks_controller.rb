@@ -14,7 +14,9 @@ class DecksController < ApplicationController
     @card_data = fetch_card_data(@deck_data)
     @user      = current_user
     if params[:draw_hand]
-      @draw_hand = Play.new().draw_hand(@deck)
+      @hand = []
+      @game = Game.new(@deck_data, @hand).mulligan
+      @draw_hand = @game.hand
     end
   end
 
