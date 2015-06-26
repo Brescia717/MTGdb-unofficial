@@ -1,7 +1,7 @@
 class CardsController < ApplicationController
   def index
     @search = Card.search(params[:q])
-    @cards  = @search.result.page(params[:page])
+    @cards  = @search.result.page(params[:page]) if params[:q]
   end
 
   def show

@@ -1,0 +1,24 @@
+#zones {
+  #battlefield {
+    background-color: green;
+    height: 330px;
+  }
+  #bottom-bar {
+    background-color: blue;
+    /* width: 75%; */
+    box-sizing: border-box;
+    #hand {
+      background-color: blue;
+      position: center;
+
+    }
+  }
+  #side-bar {
+    background-color: purple;
+    height: 455px;
+  }
+  #in-play-bar {
+    background-color: red;
+    height: 455px;
+  }
+}

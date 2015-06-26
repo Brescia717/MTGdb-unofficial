@@ -33,4 +33,13 @@ class SearchFields
   def colors
     ['Black','Blue','White','Red','Green']
   end
+
+  def names
+    cards = Card.select(:name).order('name ASC').uniq.collect
+    collection = []
+    cards.each do |card|
+      collection << card[:name]
+    end
+    collection
+  end
 end

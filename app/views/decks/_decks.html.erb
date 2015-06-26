@@ -1,0 +1,16 @@
+<div id="paginator"><%= paginate @decks %></div>
+<h1>Deck Listings</h1>
+<table>
+  <tr class="sort">
+    <th>Deck Name</th>
+    <th>Format</th>
+    <th>Creator</th>
+  </tr>
+  <% @decks.each do |deck| %>
+    <tr>
+      <td><%= link_to "#{deck.name}", deck_path(deck) %></td>
+      <td><%= deck.mtg_format %></td>
+      <td><%= deck.user_tag %></td>
+    </tr>
+  <% end %>
+</table>

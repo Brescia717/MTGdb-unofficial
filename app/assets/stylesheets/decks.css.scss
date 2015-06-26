@@ -1,0 +1,53 @@
+.deck-show {
+  padding-left: 15px;
+  padding-right: 15px;
+
+  #draw-hand-images {
+      position: relative;
+      transition: 0.5s ease;
+      -webkit-transition: 0.5s ease;
+      -moz-transition: 0.5s ease;
+
+    &:hover {
+      -webkit-transform: scale(1.25,1.25);
+      -moz-transform: scale(1.25,1.25);
+      opacity: 1;
+      z-index: 1;
+      -webkit-opacity: 1;
+      -moz-opacity: 1;
+    }
+  }
+}
+.deck-edit-page {
+  padding-left: 2%;
+  padding-right: 2%;
+
+  #deck-library {
+    a {
+      padding-right: 50px;
+    }
+  }
+}
+#deck-cards-table {
+  td > img {
+    position: relative;
+    transition: 0.5s ease;
+    -webkit-transition: 0.5s ease;
+    -moz-transition: 0.5s ease;
+
+    &:hover {
+      -webkit-transform: scale(2.7,2.7);
+      -moz-transform: scale(2.7,2.7);
+      opacity: 1;
+      z-index: 1;
+      -webkit-opacity: 1;
+      -moz-opacity: 1;
+    }
+  }
+}
+.deck-index {
+  padding: 2%;
+}
+.deck-new {
+  padding: 2%;
+}

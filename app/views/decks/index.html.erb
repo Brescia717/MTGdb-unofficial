@@ -1,24 +1,17 @@
-<div class="container">
+<div class="deck-index">
   <% if current_user %>
-    <%= link_to "Create a deck", new_deck_path %>
+    <%= link_to "Create a deck", new_deck_path, class: "button tiny" %>
   <% else %>
     <%= link_to "Sign in to create a deck!", new_user_session_path %>
   <% end %>
+  <div id="deck-search-form">
+    <%= render 'deck_search_form' %>
+  </div>
   <div class="deck-listings">
-    <h1>Deck Listings</h1>
-    <table>
-      <tr class="sort">
-        <th>Deck Name</th>
-        <th>Format</th>
-        <th>Creator</th>
-      </tr>
-      <% @decks.each do |deck| %>
-        <tr>
-          <td><%= link_to "#{deck.name}", deck_path(deck) %></td>
-          <td><%= deck.mtg_format %></td>
-          <td><%= deck.user_tag %></td>
-        </tr>
-      <% end %>
-    </table>
+    <% if @deck_search_results %>
+      <%= render 'deck_search_results' %>
+    <% else %>
+      <%= render 'decks' %>
+    <% end %>
   </div>
 </div>
