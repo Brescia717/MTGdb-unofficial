@@ -15,8 +15,7 @@ class DecksController < ApplicationController
     @user      = current_user
     if params[:draw_hand]
       @hand = []
-      @game = Game.new(@deck_data, @hand).mulligan
-      @draw_hand = @game.hand
+      @draw_hand = Game.new(@deck_data, @hand).mulligan.hand
     end
   end
 

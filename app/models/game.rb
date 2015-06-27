@@ -13,7 +13,6 @@ class Game
   end
 
   def mulligan
-    # binding.pry
     if self.hand.empty?
       @library.shuffle!
       @hand = @library.shift(7).flatten
