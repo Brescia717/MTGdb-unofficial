@@ -1,74 +1,77 @@
-<h1><%= @deck.name %></h1>
-<div id="zones" class="row">
-  <div id="side-bar" class="medium-2 columns">
-    <div id="deck">
-      <div id="library">
-        <%= form_tag(new_game_path, method: "get") do %>
-          <%= submit_tag "Mulligan", name: :mulligan %>
+<div class="game">
+  <h1><%= @deck.name %></h1>
+  <div id="zones" class="row">
+    <div id="side-bar" class="medium-2 columns">
+      <div id="deck">
+        <div id="library">
+          <%= form_tag(new_game_path, method: "get") do %>
+            <%= submit_tag "Mulligan", name: :mulligan %>
+            <%= submit_tag "Draw", name: :draw %>
+          <% end %>
+          [ Library ]
+        </div>
+        <div id="graveyard">
+          [ Graveyard ]
+        </div>
+        <div id="exile">
+          [ Exile ]
+        </div>
+      </div>
+      <div id="counters">
+        <div id="life">
+          Life: [ 20/20 ]
+        </div>
+        <div id="poison">
+          Poison: [ 0 ]
+        </div>
+        <div id="mana-pool">
+          <div id="green">[ G ]</div>
+          <div id="white">[ W ]</div>
+          <div id="blue">[ U ]</div>
+          <div id="black">[ B ]</div>
+          <div id="red">[ R ]</div>
+          <div id="colorless">[ X ]</div>
+        </div>
+      </div>
+    </div>
+    <div id="in-play-bar" class="medium-1 columns">
+      <div id="play">
+        Instant
+        Sorcery
+      </div>
+    </div>
+    <div id="battlefield" class="medium-9 columns">
+      <div id="creatures">
+        <div>Creature</div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <div id="enchantments">
+        Enchantment
+      </div>
+      <div id="artifacts">
+        Artifact
+      </div>
+      <div id="land">
+        Lands
+      </div>
+    </div>
+    <div class="medium-9 columns" id="bottom-bar">
+      <div id="hand">
+      <% if @hand %>
+        <% @hand.each do |c| %>
+          <%= image_tag "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=#{c[:card][:multiverseid]}&type=card", height: "12.5%", width: "12.5%" %>
         <% end %>
-        [ Library ]
-      </div>
-      <div id="graveyard">
-        [ Graveyard ]
-      </div>
-      <div id="exile">
-        [ Exile ]
-      </div>
-    </div>
-    <div id="counters">
-      <div id="life">
-        Life: [ 20/20 ]
-      </div>
-      <div id="poison">
-        Poison: [ 0 ]
-      </div>
-      <div id="mana-pool">
-        <div id="green">[ G ]</div>
-        <div id="white">[ W ]</div>
-        <div id="blue">[ U ]</div>
-        <div id="black">[ B ]</div>
-        <div id="red">[ R ]</div>
-        <div id="colorless">[ X ]</div>
-      </div>
-    </div>
-  </div>
-  <div id="in-play-bar" class="medium-1 columns">
-    <div id="play">
-      Instant
-      Sorcery
-    </div>
-  </div>
-  <div id="battlefield" class="medium-9 columns">
-    <div id="creatures">
-      <div>Creature</div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-    <div id="enchantments">
-      Enchantment
-    </div>
-    <div id="artifacts">
-      Artifact
-    </div>
-    <div id="land">
-      Lands
-    </div>
-  </div>
-  <div class="medium-9 columns" id="bottom-bar">
-    <div id="hand">
-    <% if @hand %>
-      <% @hand.each do |c| %>
-        <%= image_tag "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=#{c[:card][:multiverseid]}&type=card", height: "12.5%", width: "12.5%" %>
       <% end %>
-    <% end %>
+      </div>
     </div>
   </div>
 </div>
