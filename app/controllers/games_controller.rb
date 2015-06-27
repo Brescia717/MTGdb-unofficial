@@ -5,22 +5,21 @@ class GamesController < ApplicationController
   def show
     @deck            = Deck.find(params[:id])
     @library         = @deck.deck_data
-    session[:hand] ||= []
-    @game            = Game.new(@library, session[:hand])
+    @hand            = Game.new(@library, []).mulligan.hand unless params[:mulligan]
+    if session[:hand]
+      session.delete(:hand) unless params[:mulligan]
+    end
     if params[:mulligan]
-      if session[:hand].empty?
-        @game          = Game.new(@library, session[:hand])
+      if @hand.nil? && session[:hand].nil?
+        session[:hand] = Game.new(@library, []).mulligan.hand
+      end
+      @game = Game.new(@library, session[:hand])
+      session.delete(:hand)
+      @hand          = @game.mulligan.hand
+      session[:hand] = @hand
+      if @hand.size == 1
         session.delete(:hand)
-        session[:hand] = @game.mulligan.hand
-        @hand          = session[:hand]
-      else
-        @game          = Game.new(@library, session[:hand])
-        session.delete(:hand)
-        session[:hand] = @game.mulligan.hand
-        @hand          = session[:hand]
-        if @hand.size == 1
-          session.delete(:hand)
-        end
+        session[:hand] = []
       end
       @hand
     end
