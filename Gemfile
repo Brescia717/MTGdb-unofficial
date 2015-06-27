@@ -43,4 +43,5 @@ group :development, :test do
   gem 'spring'
   gem 'paperclip', '~> 4.2'
   gem 'rmagick'
+  gem 'activerecord-session_store', github: 'rails/activerecord-session_store'
 end

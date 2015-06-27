@@ -64,7 +64,7 @@
   </div>
   <div class="medium-9 columns" id="bottom-bar">
     <div id="hand">
-    <% if @hand.size >= 1 %>
+    <% if @hand %>
       <% @hand.each do |c| %>
         <%= image_tag "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=#{c[:card][:multiverseid]}&type=card", height: "12.5%", width: "12.5%" %>
       <% end %>
