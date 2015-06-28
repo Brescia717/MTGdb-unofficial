@@ -4,9 +4,9 @@ class GamesController < ApplicationController
 
   def show
     unless (params[:mulligan] || params[:draw])
-      session.delete(:library)
-      session.delete(:game)
-      session.delete(:hand)
+      [:library, :game, :hand].each { |x| session.delete(x) }
+      # session.delete(:game)
+      # session.delete(:hand)
     end
 
     @deck               = Deck.find(params[:id])

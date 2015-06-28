@@ -9,6 +9,13 @@
             <%= submit_tag "Draw", name: :draw %>
           <% end %>
           [ Library ]
+          <% if @library %>
+            <% @library.shuffle.each do |c| %>
+            <span class="library card">
+              <%= image_tag "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=#{c[:card][:multiverseid]}&type=card" %>
+            </span>
+            <% end %>
+          <% end %>
         </div>
         <div id="graveyard">
           [ Graveyard ]
@@ -68,7 +75,9 @@
       <div id="hand">
       <% if @hand %>
         <% @hand.each do |c| %>
-          <%= image_tag "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=#{c[:card][:multiverseid]}&type=card", height: "12.5%", width: "12.5%" %>
+          <span class="hand card">
+            <%= image_tag "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=#{c[:card][:multiverseid]}&type=card" %>
+          </span>
         <% end %>
       <% end %>
       </div>

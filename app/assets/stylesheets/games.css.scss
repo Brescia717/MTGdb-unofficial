@@ -6,6 +6,10 @@
   #battlefield {
     background-color: green;
     height: 330px;
+    img {
+      height: 38.5%;
+
+    }
   }
   #bottom-bar {
     background-color: blue;
@@ -14,6 +18,10 @@
     #hand {
       background-color: blue;
       position: center;
+      img {
+        height: 12.5%;
+        width: 12.5%
+      }
     }
   }
   #side-bar {
@@ -24,4 +32,8 @@
     background-color: red;
     height: 455px;
   }
+}
+.library {
+  z-index: auto;
+  position: absolute;
 }
