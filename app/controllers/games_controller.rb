@@ -9,12 +9,12 @@ class GamesController < ApplicationController
       session.delete(:hand)
     end
 
-    @deck             = Deck.find(params[:id])
-    @library          = @deck.deck_data
+    @deck               = Deck.find(params[:id])
+    @library            = @deck.deck_data
     session[:library] ||= @library.shuffle!
-    @game             = Game.new(@library, []) unless params[:mulligan]
-    session[:hand]  ||= @game.mulligan.hand unless (params[:mulligan] || params[:draw])
-    @hand             = session[:hand]
+    @game               = Game.new(@library, []) unless params[:mulligan]
+    session[:hand]    ||= @game.mulligan.hand unless (params[:mulligan] || params[:draw])
+    @hand               = session[:hand]
 
     mulligan if params[:mulligan]
     draw     if (params[:draw] && session[:hand])
@@ -35,7 +35,7 @@ class GamesController < ApplicationController
   def draw
     @game = Game.new(session[:library], session[:hand])
     @game.draw
-    session[:game] = @game
+    session[:game]    = @game
     session[:hand]    = session[:game].hand
     session[:library] = session[:game].library
     @hand             = session[:hand]
