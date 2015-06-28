@@ -17,7 +17,7 @@ class GamesController < ApplicationController
     @hand               = session[:hand]
 
     mulligan if params[:mulligan]
-    draw     if (params[:draw] && session[:hand])
+    draw     if params[:draw]
   end
 
   def mulligan
