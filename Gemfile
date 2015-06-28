@@ -23,6 +23,7 @@ gem 'kaminari'
 gem 'devise'
 gem 'nokogiri'
 gem 'foundation-rails'
+gem 'activerecord-session_store', github: 'rails/activerecord-session_store'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -43,5 +44,4 @@ group :development, :test do
   gem 'spring'
   gem 'paperclip', '~> 4.2'
   gem 'rmagick'
-  gem 'activerecord-session_store', github: 'rails/activerecord-session_store'
 end
