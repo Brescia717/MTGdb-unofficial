@@ -17,14 +17,16 @@ $(document).ready(function() {
     if (card.hasClass("in_play")) {
       card.addClass("untapped");
       card.on('click', function() {
-        card.toggleClass("tapped");
-        card.toggleClass("untapped");
+        if (card.hasClass("untapped")) {
+          card.addClass("tapped");
+          card.removeClass("untapped");
+          TweenMax.to(".tapped img", 0.25, {rotation:90});
+        } else if (card.hasClass("tapped")) {
+          card.addClass("untapped");
+          card.removeClass("tapped");
+          TweenMax.to(".untapped img", 0.25, {rotation:0});
+        }
       });
-      if (card.hasClass('tapped')) {
-        TweenMax.to(".tapped img", 0.5, {rotation:90});
-      } else {
-        TweenMax.to(".untapped img", 0.5, {rotation:0});
-      }
     }
 
     if (card.hasClass("library") === true) {
@@ -32,6 +34,16 @@ $(document).ready(function() {
       card.addClass("hand");
       $("#hand").append( card );
     }
-
   });
+  // var i = 1;
+  // if (i < 60) {
+  //   var topCard = $('#library span:nth-last-child('+ i +')')
+  //   $('#draw_button').on('click', function() {
+  //     topCard.removeClass("library");
+  //     topCard.addClass("hand");
+  //     $("#hand").append( topCard );
+  //   });
+  //   i = i + 1;
+  // }
+
 });

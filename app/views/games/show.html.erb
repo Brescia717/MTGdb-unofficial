@@ -1,16 +1,17 @@
 <div class="game">
   <h1><%= @deck.name %></h1>
+  <%= link_to "New game", new_game_path, class: "button tiny" %>
   <div id="zones" class="row">
     <div id="side-bar" class="medium-2 columns">
       <div id="deck">
+        <button type="button" name="draw" id="draw_button" class="tiny">Draw</button><br>
         <div id="library">
           <%= form_tag(new_game_path, method: "get") do %>
             <%= submit_tag "Mulligan", name: :mulligan %>
-            <%= submit_tag "Draw", name: :draw %>
           <% end %>
           [ Library ]
           <% if @library %>
-            <% @library.shuffle.each do |c| %>
+            <% @library.each do |c| %>
             <span class="library card">
               <%= image_tag "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=#{c[:card][:multiverseid]}&type=card" %>
             </span>
@@ -50,16 +51,6 @@
     <div id="battlefield" class="medium-9 columns">
       <div id="creatures">
         <div>Creature</div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
       </div>
       <div id="enchantments">
         Enchantment
