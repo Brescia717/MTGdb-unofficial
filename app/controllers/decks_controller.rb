@@ -6,6 +6,8 @@ class DecksController < ApplicationController
     @deck_search_results = Deck.deck_search(params[:deck_search])
                             .order("name DESC")
                             .page(params[:page]) if params[:deck_search]
+    session[:decks_path] = true
+    session.delete(:cards_path)
   end
 
   def show
@@ -14,7 +16,7 @@ class DecksController < ApplicationController
     @card_data = fetch_card_data(@deck_data)
     @user      = current_user
     if params[:draw_hand]
-      @hand = []
+      @hand      = []
       @draw_hand = Game.new(@deck_data, @hand).mulligan.hand
     end
   end

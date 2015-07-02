@@ -26,12 +26,4 @@ class Game
     @game = Game.new(@library, @hand)
     @game
   end
-
-  def draw(*num)
-    num          = [1] if num.empty?
-    @cards_drawn = []
-    @cards_drawn << @library.shift(num.first)
-    @hand        = @hand + @cards_drawn.flatten
-    @cards_drawn
-  end
 end
