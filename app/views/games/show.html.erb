@@ -1,17 +1,27 @@
 <div class="game">
   <h1><%= @deck.name %></h1>
+  <%= link_to "New game", new_game_path, class: "button tiny" %>
   <div id="zones" class="row">
     <div id="side-bar" class="medium-2 columns">
       <div id="deck">
+        <input type="submit" name="draw" id="draw_button" value="Draw" class=""></input>
         <div id="library">
           <%= form_tag(new_game_path, method: "get") do %>
             <%= submit_tag "Mulligan", name: :mulligan %>
-            <%= submit_tag "Draw", name: :draw %>
           <% end %>
-          [ Library ]
+          <% if @library %>
+            <% @library.each do |c| %>
+            <span class="library card">
+              <%= image_tag "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=#{c[:card][:multiverseid]}&type=card" %>
+            </span>
+            <% end %>
+            <span class="library card">
+              <img src="/assets/MTG_card_back.jpg" alt="MTG card back" />
+            </span>
+          <% end %>
         </div>
-        <div id="graveyard">
-          [ Graveyard ]
+        <div id="graveyard" class="box">
+          <span id="placeholder"></span>
         </div>
         <div id="exile">
           [ Exile ]
@@ -43,16 +53,6 @@
     <div id="battlefield" class="medium-9 columns">
       <div id="creatures">
         <div>Creature</div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
       </div>
       <div id="enchantments">
         Enchantment
@@ -68,7 +68,9 @@
       <div id="hand">
       <% if @hand %>
         <% @hand.each do |c| %>
-          <%= image_tag "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=#{c[:card][:multiverseid]}&type=card", height: "12.5%", width: "12.5%" %>
+          <span class="hand card">
+            <%= image_tag "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=#{c[:card][:multiverseid]}&type=card" %>
+          </span>
         <% end %>
       <% end %>
       </div>

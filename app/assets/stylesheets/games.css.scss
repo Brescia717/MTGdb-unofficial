@@ -6,6 +6,9 @@
   #battlefield {
     background-color: green;
     height: 330px;
+    img {
+      height: 38.5%;
+    }
   }
   #bottom-bar {
     background-color: blue;
@@ -14,14 +17,49 @@
     #hand {
       background-color: blue;
       position: center;
+      img {
+        height: 12.5%;
+        width: 12.5%;
+      }
     }
   }
   #side-bar {
     background-color: purple;
     height: 455px;
+    #library {
+
+    }
+
+    #graveyard {
+      /* max-width: 75%;
+      padding-left: 25px; */
+
+    }
   }
   #in-play-bar {
     background-color: red;
     height: 455px;
+  }
+}
+.library {
+  z-index: auto;
+  position: absolute;
+  max-width: 75%;
+  padding-left: 25px;
+  -webkit-transform: rotate(90deg);
+}
+.box {
+  #placeholder {
+    margin-top: 145px;
+    height: 99.985px;
+    width: 138.494px;
+    max-width: 100%;
+    max-height: auto;
+    display: inline-block;
+    box-sizing: inherit;
+    vertical-align: middle;
+    background-color: white;
+    z-index: 60;
+    position: inherit;
   }
 }
