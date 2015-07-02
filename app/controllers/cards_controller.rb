@@ -7,10 +7,14 @@ class CardsController < ApplicationController
   end
 
   def show
-    @card       = Card.find_by(multiverseid: params[:multiverseid])
-    @card_price = get_price(@card)
-    @card_set   = @card.card_set.gsub(/[+]/, ' ')
-    @card.name  = @card.name.gsub(/[+]/, ' ')
+    @card        = Card.find_by(multiverseid: params[:multiverseid])
+    @card_price  = get_price(@card)
+    @card_set    = @card.card_set.gsub(/[+]/, ' ')
+    @card.name   = @card.name.gsub(/[+]/, ' ')
+
+    @commentable = @card
+    @comments    = @commentable.comments
+    @comment     = Comment.new
   end
 
 private

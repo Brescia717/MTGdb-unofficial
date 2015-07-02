@@ -19,6 +19,10 @@ class DecksController < ApplicationController
       @hand      = []
       @draw_hand = Game.new(@deck_data, @hand).mulligan.hand
     end
+
+    @commentable = @deck
+    @comments    = @commentable.comments
+    @comment     = Comment.new
   end
 
   def new
@@ -44,6 +48,8 @@ class DecksController < ApplicationController
     if params[:card_search]
       @cards = Card.card_search(params[:card_search]).order("cards.name DESC")
     end
+    session[:cards_path] = true
+    session.delete(:decks_path)
   end
 
   def update

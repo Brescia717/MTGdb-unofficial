@@ -1,0 +1,6 @@
+<% @comments.each do |comment| %>
+  <p><%= comment.content %></p>
+  <% if comment.owner?(current_user) %>
+    <%= link_to "Delete", deck_comment_path(@deck, comment), method: :delete %>
+  <% end %>
+<% end %>

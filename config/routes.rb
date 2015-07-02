@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources  :cards
-  resources  :decks
+  resources  :cards do
+    resources :comments
+  end
+  resources  :decks do
+    resources :comments
+  end
   resources  :search_suggestions
 
   get '/card/:multiverseid'      => 'cards#show',  as: 'card_multiverseid'

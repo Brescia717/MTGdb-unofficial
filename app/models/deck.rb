@@ -1,6 +1,7 @@
 class Deck < ActiveRecord::Base
   belongs_to :user
   has_many   :cards
+  has_many   :comments, as: :commentable
 
   validates :name,
     presence: true,
