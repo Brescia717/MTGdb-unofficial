@@ -10,6 +10,7 @@ gem 'coffee-rails', '~> 4.1.0'
 # gem 'therubyracer', platforms: :ruby
 gem 'jquery-rails', '~> 4.0.3'
 gem 'jquery-ui-rails'
+gem 'best_in_place', '~> 3.0.1'
 gem 'jquery-turbolinks'
 gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder

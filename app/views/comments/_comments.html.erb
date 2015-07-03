@@ -1,6 +1,13 @@
 <% @comments.each do |comment| %>
-  <p><%= comment.content %></p>
-  <% if comment.owner?(current_user) %>
-    <%= link_to "Delete", deck_comment_path(@deck, comment), method: :delete %>
-  <% end %>
+  <div id="comment">
+    <p><%= best_in_place [@commentable, comment], :content, type: :textarea %></p>
+  </div>
+  <div id="comment_buttons">
+    <% if comment.owner?(current_user) %>
+      <button type="button" name="edit" class="tiny" id="comment_edit_btn">Edit</button>
+      <%= link_to "Delete", deck_comment_path(@deck, comment),
+                            method: :delete, class: "button tiny",
+                            id: "comment_delete_btn" %>
+    <% end %>
+  </div>
 <% end %>
