@@ -59,7 +59,7 @@ class DecksController < ApplicationController
     remove_all  if edit_deck_params[:remove_all]
     add_playset if edit_deck_params[:add_playset]
 
-    redirect_to edit_deck_path
+    redirect_to @deck if @deck.update(deck_params)
   end
 
   def destroy
@@ -79,6 +79,7 @@ class DecksController < ApplicationController
     library = @deck.library + card
     @deck.update(library: library)
     flash[:success] = "A copy of #{Card.find_by(multiverseid: edit_deck_params[:add]).name} has been added to your deck."
+    redirect_to edit_deck_path
   end
 
   def delete
@@ -87,6 +88,7 @@ class DecksController < ApplicationController
     library.delete_at library.index(card) unless library.index(card).nil?
     @deck.update(library: library)
     flash[:notice] = "A copy of #{Card.find_by(multiverseid: edit_deck_params[:delete]).name} has been removed from your deck."
+    redirect_to edit_deck_path
   end
 
   def remove_all
@@ -94,12 +96,14 @@ class DecksController < ApplicationController
     library = @deck.library
     library.delete(card) unless library.index(card).nil?
     @deck.update(library: library)
+    redirect_to edit_deck_path
   end
 
   def add_playset
     card = [edit_deck_params[:add_playset].to_i]
     library =  @deck.library + card * 4
     @deck.update(library: library)
+    redirect_to edit_deck_path
   end
 
   def fetch_card_data(deck_data)
