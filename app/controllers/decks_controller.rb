@@ -132,7 +132,7 @@ class DecksController < ApplicationController
 private
 
   def deck_params
-    params.permit(:name, :mtg_format, :library)
+    params.require(:deck).permit(:name, :mtg_format, :library)
   end
 
   def edit_deck_params

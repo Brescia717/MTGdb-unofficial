@@ -1,7 +1,8 @@
 class CommentsController < ApplicationController
   before_action :load_commentable
+  before_action :all_comments, only: [:index, :create]
   before_action :authenticate_user!, except: [:index]
-  respond_to    :html, :json, :js, :coffee
+  respond_to    :html, :json, :js
 
   def index
     @comments = @commentable.comments
@@ -15,7 +16,12 @@ class CommentsController < ApplicationController
     @comment = @commentable.comments.new(comment_params)
     @comment.user_id = current_user.id
     if @comment.save
-      redirect_to @commentable, notice: "Comment created."
+      binding.pry
+      respond_to do |format|
+        format.html { redirect_to @commentable }
+        format.js
+      end
+      # redirect_to @commentable, notice: "Comment created."
     else
       render :new
     end
@@ -33,9 +39,13 @@ class CommentsController < ApplicationController
 
   def destroy
     @comment = Comment.find(params[:id])
-    @comment.delete
-
-    respond_with @commentable
+    @commentable = @comment.commentable
+    if @comment.destroy
+      respond_to do |format|
+        format.html { redirect_to @commentable }
+        format.js
+      end
+    end
   end
 
 private
@@ -47,5 +57,9 @@ private
   def load_commentable
     resource, id = request.path.split('/')[1, 2]
     @commentable = resource.singularize.classify.constantize.find(id)
+  end
+
+  def all_comments
+    @comments = @commentable.comments
   end
 end
