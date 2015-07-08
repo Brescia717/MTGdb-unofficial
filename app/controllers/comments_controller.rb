@@ -5,7 +5,7 @@ class CommentsController < ApplicationController
   respond_to    :html, :json, :js
 
   def index
-    @comments = @commentable.comments
+    @comments = @commentable.comments.order('ASC')
   end
 
   def new
@@ -16,7 +16,6 @@ class CommentsController < ApplicationController
     @comment = @commentable.comments.new(comment_params)
     @comment.user_id = current_user.id
     if @comment.save
-      binding.pry
       respond_to do |format|
         format.html { redirect_to @commentable }
         format.js

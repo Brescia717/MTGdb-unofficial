@@ -11,9 +11,9 @@
 <% end %>
 
 <div class="field">
-  <%= f.text_area :content, rows: 8 %>
+  <%= f.text_area :content, rows: 8, id: "comment_form_field" %>
 </div>
-<div class="actions">
-  <%= f.submit %>
+<div class="action">
+  <%= f.submit class: "button tiny" %>
 </div>
 <% end %>

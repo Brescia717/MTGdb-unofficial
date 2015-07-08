@@ -1,2 +1,2 @@
-$('#comments_form').remove();
-$('#comments').append('<%= j render(@comment) %>');
+$('#comments').html('<%= j render "comments/comments" %>');
+$('#comment_form_field').val('');
