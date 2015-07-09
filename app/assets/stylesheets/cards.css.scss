@@ -1,21 +1,26 @@
 .card-show {
-  #card-image-box {
-    display: inline-block;
-    margin-left: auto;
-    margin-right: auto;
+  padding: 2%;
+
+  #card-img-box {
+/*     display: inline-block;
+margin-left: auto;
+margin-right: auto; */
   }
-  #card-info-box {
-    display: block;
+  .custom-panel {
+    @include panel();
+    @include radius();
+
+    /* display: block;
     position: relative;
     margin-left: 25%;
     margin-right: 45%;
-    top: -300px;
-    p {
+    top: -300px; */
+    /* p {
       margin-top: auto;
       margin-bottom: auto;
-    }
+    } */
   }
-  #card-info-header {
+  /* #card-info-header {
     display: block;
     position: relative;
     top: -300px;
@@ -28,7 +33,7 @@
     position: relative;
     left: 0px;
     bottom: 300px;
-  }
+  } */
 }
 
 #card-image {
@@ -55,10 +60,6 @@
 .card-index {
   padding-right: 15px;
   padding-left: 15px;
-}
-
-.card-show {
-  padding: 15px;
 }
 
 .hidden {
