@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150702204520) do
+ActiveRecord::Schema.define(version: 20150710202338) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,17 +29,18 @@ ActiveRecord::Schema.define(version: 20150702204520) do
     t.string   "toughness"
     t.text     "legalities"
     t.text     "printings"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
     t.string   "card_set"
     t.string   "set_code"
     t.date     "release_date"
-    t.integer  "multiverseid", null: false
+    t.integer  "multiverseid",                         null: false
     t.integer  "card_number"
     t.string   "flavor"
     t.string   "artist"
     t.string   "image_url"
     t.string   "hi_image_url"
+    t.decimal  "price",        precision: 8, scale: 2
   end
 
   create_table "comments", force: :cascade do |t|
