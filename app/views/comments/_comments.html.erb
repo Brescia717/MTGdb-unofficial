@@ -1,0 +1,11 @@
+<% @comments.each do |comment| %>
+  <div id='<%= "comment_#{comment.id}" %>' class="comment">
+    <p><%= best_in_place [@commentable, comment], :content, type: :textarea %></p>
+    <% if comment.owner?(current_user) %>
+      <button type="button" name="edit" class="tiny comment_edit_btn" id="comment_edit_btn">Edit</button>
+      <%= link_to "Delete", [@commentable, comment],
+                            method: :delete, class: "button tiny",
+                            id: "comment_delete_btn", remote: true, data: {confirm: "Are you sure?"} %>
+    <% end %>
+  </div>
+<% end %>

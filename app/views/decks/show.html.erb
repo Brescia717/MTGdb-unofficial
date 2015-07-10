@@ -5,9 +5,15 @@
       <strong>Created by: </strong><%= @deck.user_tag %>
     </p>
     <p><strong>Format: </strong><%= @deck.mtg_format %></p>
+    <div id="deck_edit_delete_btns">
     <% if @deck.user == current_user %>
-      <%= link_to "Edit deck", edit_deck_path(@deck), class: "button tiny" %>
+      <%= link_to "Edit deck", edit_deck_path(@deck), class: "button tiny",
+            id: "deck_edit_btn" %>
+      <%= link_to "Delete deck", deck_path(@deck), method: :delete,
+            data: {confirm: "Are you sure you want to delete this deck?"},
+            class: "button tiny", id: "deck_delete_btn" %>
     <% end %>
+    </div>
     <hr>
   </div>
   <div class="new-game">
@@ -22,7 +28,9 @@
     <% if @draw_hand %>
       <p><strong><%= "Hand: #{@draw_hand.count} cards" %></strong></p>
       <% @draw_hand.each do |c| %>
-        <%= image_tag("http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=#{c[:card][:multiverseid]}&type=card", alt: "#{c[:card][:multiverseid]}", height: "12.5%", width: "12.5%", id: "draw-hand-images") %>
+        <%= image_tag("http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=#{c[:card][:multiverseid]}&type=card",
+              alt: "#{c[:card][:multiverseid]}", height: "12.5%",
+              width: "12.5%", id: "draw-hand-images") %>
       <% end %>
       <hr />
     <% end %>
@@ -35,17 +43,16 @@
         No cards found.
       <% else %>
         <% @card_data.each do |card| %>
-            <%= image_tag("http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=#{card[:multiverseid]}&type=card", alt: "#{card[:multiverseid]}") %>
+            <%= image_tag("http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=#{card[:multiverseid]}&type=card",
+                  alt: "#{card[:multiverseid]}") %>
         <% end %>
       <% end %>
     </p>
     <br />
   </div>
-  <div id="delete-button">
-    <% if @deck.user == current_user %>
-      <%= link_to "Delete deck", deck_path(@deck), method: :delete,
-          data: {confirm: "Are you sure you want to delete this deck?"},
-          class: "button tiny" %>
-    <% end %>
+  <div class="comments">
+    <h3>Comments</h3>
+    <div id="comments_form"><%= render 'comments/form' %></div>
+    <div id="comments"><%= render 'comments/comments' %></div>
   </div>
 </div>

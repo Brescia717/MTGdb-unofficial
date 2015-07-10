@@ -14,6 +14,8 @@
 //= require jquery_ujs
 //= require jquery-ui
 //= require jquery-ui/autocomplete
+//= require jquery.purr
+//= require best_in_place
 //= require jquery.turbolinks
 //= require foundation
 //= require turbolinks

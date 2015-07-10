@@ -19,6 +19,10 @@ class DecksController < ApplicationController
       @hand      = []
       @draw_hand = Game.new(@deck_data, @hand).mulligan.hand
     end
+
+    @commentable = @deck
+    @comments    = @commentable.comments
+    @comment     = Comment.new
   end
 
   def new
@@ -42,35 +46,20 @@ class DecksController < ApplicationController
     @basic_lands  = [2774, 294, 2770, 293, 277, 2742, 2766, 290, 2749, 289]
     @lib_quantity = @deck.library.sort.each_with_object(Hash.new(0)) { |mult_id, counts| counts[mult_id] += 1 }
     if params[:card_search]
-      @cards = Card.card_search(params[:card_search]).order("cards.name DESC")
+      @cards = Card.card_search(params[:card_search]).order("cards.name DESC") unless params[:card_search].blank?
     end
+    session[:cards_path] = true
+    session.delete(:decks_path)
   end
 
   def update
     @deck = Deck.find(params[:id])
-    if edit_deck_params[:add]
-      card    = [edit_deck_params[:add].to_i]
-      library = @deck.library + card
-      @deck.update(library: library)
-      flash[:success] = "A copy of #{Card.find_by(multiverseid: edit_deck_params[:add]).name} has been added to your deck."
-    elsif edit_deck_params[:delete]
-      card    = edit_deck_params[:delete].to_i
-      library = @deck.library
-      library.delete_at library.index(card) unless library.index(card).nil?
-      @deck.update(library: library)
-      flash[:notice] = "A copy of #{Card.find_by(multiverseid: edit_deck_params[:delete]).name} has been removed from your deck."
-    elsif edit_deck_params[:remove_all]
-      card    = edit_deck_params[:remove_all].to_i
-      library = @deck.library
-      library.delete(card) unless library.index(card).nil?
-      @deck.update(library: library)
-    elsif edit_deck_params[:add_playset]
-      card = [edit_deck_params[:add_playset].to_i]
-      library =  @deck.library + card * 4
-      @deck.update(library: library)
-    end
-    @deck.update(deck_params)
-    redirect_to edit_deck_path
+    add         if edit_deck_params[:add]
+    delete      if edit_deck_params[:delete]
+    remove_all  if edit_deck_params[:remove_all]
+    add_playset if edit_deck_params[:add_playset]
+
+    redirect_to @deck if @deck.update(deck_params)
   end
 
   def destroy
@@ -79,6 +68,42 @@ class DecksController < ApplicationController
       flash[:notice] = "Your deck has been deleted."
       redirect_to decks_path
     end
+  end
+
+  ###################################
+  ##  Controller specific methods  ##
+  ###################################
+
+  def add
+    card    = [edit_deck_params[:add].to_i]
+    library = @deck.library + card
+    @deck.update(library: library)
+    flash[:success] = "A copy of #{Card.find_by(multiverseid: edit_deck_params[:add]).name} has been added to your deck."
+    redirect_to edit_deck_path
+  end
+
+  def delete
+    card    = edit_deck_params[:delete].to_i
+    library = @deck.library
+    library.delete_at library.index(card) unless library.index(card).nil?
+    @deck.update(library: library)
+    flash[:notice] = "A copy of #{Card.find_by(multiverseid: edit_deck_params[:delete]).name} has been removed from your deck."
+    redirect_to edit_deck_path
+  end
+
+  def remove_all
+    card    = edit_deck_params[:remove_all].to_i
+    library = @deck.library
+    library.delete(card) unless library.index(card).nil?
+    @deck.update(library: library)
+    redirect_to edit_deck_path
+  end
+
+  def add_playset
+    card = [edit_deck_params[:add_playset].to_i]
+    library =  @deck.library + card * 4
+    @deck.update(library: library)
+    redirect_to edit_deck_path
   end
 
   def fetch_card_data(deck_data)
@@ -122,14 +147,13 @@ class DecksController < ApplicationController
     card_data
   end
 
-
 private
 
   def deck_params
-    params.permit(:name, :mtg_format, :library)
+    params.require(:deck).permit(:name, :mtg_format, :library)
   end
 
   def edit_deck_params
-    params.permit(:add, :delete, :remove_all, :add_playset)
+    params.permit(:add, :delete, :remove_all, :add_playset, :search)
   end
 end

@@ -1,11 +1,10 @@
-<div class="card-show">
-  <div id="card-image-box">
+<div class="card-show row">
+  <div id="card-img-box" class="medium-3 columns">
     <img src="<%= @card.fetch_image %>" alt="@card.name" />
   </div>
-  <div id="card-info-header">
+  <div id="card-info-panel" class="medium-9 columns custom-panel">
     <h2>Card info: </h2>
-  </div>
-  <div id="card-info-box">
+
     <hr/>
     <p><strong>Name:  </strong><%= @card.name %></p>
     <p><strong>Types: </strong><%= @card.type_and_subtype %></p>
@@ -27,5 +26,10 @@
   </div>
   <div class="back-button">
     <p><%= link_to "Back", cards_path, class: "button tiny" %></p>
+  </div>
+  <div class="comments">
+    <h3>Comments</h3>
+    <div id="comments_form"><%= render 'comments/form' %></div>
+    <div id="comments"><%= render 'comments/comments' %></div>
   </div>
 </div>

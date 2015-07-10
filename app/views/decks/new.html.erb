@@ -15,6 +15,6 @@
     <%= f.select :mtg_format, SearchFields.new().legal_formats,
         {include_blank: true} %>
 
-    <p><%= f.submit "Create Deck" %></p>
+    <p><%= f.submit class: "button" %></p>
   <% end %>
 </div>
