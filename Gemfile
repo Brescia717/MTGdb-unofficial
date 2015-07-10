@@ -25,6 +25,7 @@ gem 'devise'
 gem 'nokogiri'
 gem 'foundation-rails'
 gem 'activerecord-session_store', github: 'rails/activerecord-session_store'
+gem 'whenever', :require => false
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
