@@ -1,5 +1,5 @@
 class DecksController < ApplicationController
-  before_action :authenticate_user!, except: :index
+  before_action :authenticate_user!, except: [:index, :show]
 
   def index
     @decks = Deck.order(:updated_at).page(params[:page])

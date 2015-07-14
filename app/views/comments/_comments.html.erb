@@ -1,7 +1,7 @@
 <% @comments.each do |comment| %>
   <div id='<%= "comment_#{comment.id}" %>' class="comment panel radius">
     <p>
-      <% if current_user.id == comment.user_id %>
+      <% if current_user && current_user.id == comment.user_id %>
         <%= best_in_place [@commentable, comment], :content, type: :textarea %> -
       <% else %>
         <%= comment.content %> -
@@ -11,7 +11,7 @@
         <span id="comment-updated-at"><%= comment.updated_at.strftime("%b %e '%y at %H:%M") %></span>
       </span>
     </p>
-    <% if comment.owner?(current_user) %>
+    <% if current_user && comment.owner?(current_user) %>
       <button type="button" name="edit" class="tiny comment_edit_btn" id="comment_edit_btn">Edit</button>
       <%= link_to "Delete", [@commentable, comment],
                             method: :delete, class: "button tiny",
