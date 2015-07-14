@@ -47,12 +47,12 @@
       <% if @deck.library.empty? %>
         No cards found.
       <% else %>
+        <div id="contents"><%= render 'contents' %></div>
         <% @card_data.each do |card| %>
             <%= image_tag("http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=#{card[:multiverseid]}&type=card",
                   alt: "#{card[:multiverseid]}") %>
         <% end %>
       <% end %>
-      <% binding.pry %>
     </p>
     <br />
   </div>

@@ -1,0 +1,44 @@
+<div class="row">
+  <div class="medium-3 columns">
+    <ul>
+      <strong>Creatures: </strong>
+      <% @creatures.each do |card, quant| %>
+        <li><%= "#{card}: #{quant}" %></li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="medium-3 columns">
+    <ul>
+      <strong>Lands: </strong>
+      <% @lands.each do |card, quant| %>
+        <li><%= "#{card}: #{quant}" %></li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="medium-3 columns">
+    <ul>
+      <strong>Enchantments: </strong>
+      <% @enchantments.each do |card, quant| %>
+        <li><%= "#{card}: #{quant}" %></li>
+      <% end %>
+    </ul>
+    <ul>
+      <strong>Artifacts: </strong>
+      <% @artifacts.each do |card, quant| %>
+        <li><%= "#{card}: #{quant}" %></li>
+      <% end %>
+    </ul>
+    <ul>
+      <strong>Instants: </strong>
+      <% @instants.each do |card, quant| %>
+        <li><%= "#{card}: #{quant}" %></li>
+      <% end %>
+    </ul>
+    <ul>
+      <strong>Sorceries: </strong>
+      <% @sorceries.each do |card, quant| %>
+        <li><%= "#{card}: #{quant}" %></li>
+      <% end %>
+    </ul>
+  </div>
+</div>

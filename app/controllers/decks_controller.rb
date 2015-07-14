@@ -15,7 +15,8 @@ class DecksController < ApplicationController
     @deck_data  = @deck.deck_data
     @deck_data.each { |x| @total ||= 0; x[:card][:price] ? @total += x[:card][:price] : next }
     @deck_price = @total ? "$#{@total}" : "$0.00"
-    # @card_data  = fetch_card_data(@deck_data)
+    @contents  = fetch_card_data(@deck_data)
+    # binding.pry
     @user       = current_user
     if params[:draw_hand]
       @hand      = []
@@ -104,9 +105,9 @@ class DecksController < ApplicationController
   end
 
   def fetch_card_data(deck_data)
-    card_data = []
+    @card_data = []
     deck_data.each do |c|
-      card_data << {
+      @card_data << {
         name:         c[:card][:name],
         multiverseid: c[:card][:multiverseid],
         types:        c[:card][:types],
@@ -119,7 +120,7 @@ class DecksController < ApplicationController
     @sorceries    = []
     @artifacts    = []
     @enchantments = []
-    card_data.each do |card|
+    @card_data.each do |card|
       if card[:types].include?("Land")
         @lands << card[:name]
       elsif card[:types].include?("Creature") || card[:types].include?("Summon")
@@ -140,8 +141,11 @@ class DecksController < ApplicationController
     @sorceries    = @sorceries.each_with_object(Hash.new(0)) { |card,counts| counts[card] += 1 }
     @artifacts    = @artifacts.each_with_object(Hash.new(0)) { |card,counts| counts[card] += 1 }
     @enchantments = @enchantments.each_with_object(Hash.new(0)) { |card,counts| counts[card] += 1 }
+    contents = { lands: @lands, creatures: @creatures, instants: @instants,
+       sorceries: @sorceries, artifacts: @artifacts,
+       enchantments: @enchantments }
 
-    card_data
+    contents
   end
 
 private
