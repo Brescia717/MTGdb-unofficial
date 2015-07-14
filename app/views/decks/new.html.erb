@@ -14,6 +14,8 @@
     <%= f.label :mtg_format, "Format" %><br />
     <%= f.select :mtg_format, SearchFields.new().legal_formats,
         {include_blank: true} %>
+    <%= f.label :description %>
+    <%= f.text_area :description %>
 
     <p><%= f.submit class: "button" %></p>
   <% end %>

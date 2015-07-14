@@ -5,6 +5,8 @@
     <%= f.text_field :name %>
     <%= f.label :mtg_format %>
     <%= f.select :mtg_format, SearchFields.new.legal_formats %>
+    <%= f.label :description %>
+    <%= f.text_area :description %>
     <%= f.submit "Save", class: "button tiny" %>
   <% end %>
   <div id="card-search-form">

@@ -7,4 +7,8 @@ class Comment < ActiveRecord::Base
   def owner?(user)
     (self.user_id == user.id) ? true : false
   end
+
+  def user_tag
+    self.user.email.gsub(/@+\w+.+\z/, '')
+  end
 end

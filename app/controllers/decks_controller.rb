@@ -11,10 +11,13 @@ class DecksController < ApplicationController
   end
 
   def show
-    @deck      = Deck.find(params[:id])
-    @deck_data = @deck.deck_data
-    @card_data = fetch_card_data(@deck_data)
-    @user      = current_user
+    @deck       = Deck.find(params[:id])
+    @deck_data  = @deck.deck_data
+    @deck_data.each { |x| @total ||= 0; x[:card][:price] ? @total += x[:card][:price] : next }
+    @deck_price = @total ? "$#{@total}" : "$0.00"
+    @contents  = fetch_card_data(@deck_data)
+    # binding.pry
+    @user       = current_user
     if params[:draw_hand]
       @hand      = []
       @draw_hand = Game.new(@deck_data, @hand).mulligan.hand
@@ -43,7 +46,7 @@ class DecksController < ApplicationController
   def edit
     @deck         = Deck.find(params[:id])
     @deck_cards   = @deck.library.map { |multiverseid| Card.find_by(multiverseid: multiverseid) } if @deck.library
-    @basic_lands  = [2774, 294, 2770, 293, 277, 2742, 2766, 290, 2749, 289]
+    @basic_lands  = [2774, 294, 2770, 293, 277, 2742, 2766, 290, 2749, 289] # Multiverse ids of basic and snow-covered lands
     @lib_quantity = @deck.library.sort.each_with_object(Hash.new(0)) { |mult_id, counts| counts[mult_id] += 1 }
     if params[:card_search]
       @cards = Card.card_search(params[:card_search]).order("cards.name DESC") unless params[:card_search].blank?
@@ -58,14 +61,19 @@ class DecksController < ApplicationController
     delete      if edit_deck_params[:delete]
     remove_all  if edit_deck_params[:remove_all]
     add_playset if edit_deck_params[:add_playset]
-
-    redirect_to @deck if @deck.update(deck_params)
+    if @library
+      @deck.update(library: @library)
+      redirect_to edit_deck_path(@deck)
+    else
+      @deck.update(deck_params)
+      redirect_to @deck
+    end
   end
 
   def destroy
     @deck = Deck.find(params[:id])
     if @deck.destroy
-      flash[:notice] = "Your deck has been deleted."
+      flash[:alert] = "Your deck has been deleted."
       redirect_to decks_path
     end
   end
@@ -76,40 +84,30 @@ class DecksController < ApplicationController
 
   def add
     card    = [edit_deck_params[:add].to_i]
-    library = @deck.library + card
-    @deck.update(library: library)
-    flash[:success] = "A copy of #{Card.find_by(multiverseid: edit_deck_params[:add]).name} has been added to your deck."
-    redirect_to edit_deck_path
+    @library = @deck.library + card
   end
 
   def delete
     card    = edit_deck_params[:delete].to_i
-    library = @deck.library
-    library.delete_at library.index(card) unless library.index(card).nil?
-    @deck.update(library: library)
-    flash[:notice] = "A copy of #{Card.find_by(multiverseid: edit_deck_params[:delete]).name} has been removed from your deck."
-    redirect_to edit_deck_path
+    @library = @deck.library
+    @library.delete_at @library.index(card) unless @library.index(card).nil?
   end
 
   def remove_all
     card    = edit_deck_params[:remove_all].to_i
-    library = @deck.library
-    library.delete(card) unless library.index(card).nil?
-    @deck.update(library: library)
-    redirect_to edit_deck_path
+    @library = @deck.library
+    @library.delete(card) unless @library.index(card).nil?
   end
 
   def add_playset
     card = [edit_deck_params[:add_playset].to_i]
-    library =  @deck.library + card * 4
-    @deck.update(library: library)
-    redirect_to edit_deck_path
+    @library =  @deck.library + card * 4
   end
 
   def fetch_card_data(deck_data)
-    card_data = []
+    @card_data = []
     deck_data.each do |c|
-      card_data << {
+      @card_data << {
         name:         c[:card][:name],
         multiverseid: c[:card][:multiverseid],
         types:        c[:card][:types],
@@ -122,7 +120,7 @@ class DecksController < ApplicationController
     @sorceries    = []
     @artifacts    = []
     @enchantments = []
-    card_data.each do |card|
+    @card_data.each do |card|
       if card[:types].include?("Land")
         @lands << card[:name]
       elsif card[:types].include?("Creature") || card[:types].include?("Summon")
@@ -143,17 +141,20 @@ class DecksController < ApplicationController
     @sorceries    = @sorceries.each_with_object(Hash.new(0)) { |card,counts| counts[card] += 1 }
     @artifacts    = @artifacts.each_with_object(Hash.new(0)) { |card,counts| counts[card] += 1 }
     @enchantments = @enchantments.each_with_object(Hash.new(0)) { |card,counts| counts[card] += 1 }
+    contents = { lands: @lands, creatures: @creatures, instants: @instants,
+       sorceries: @sorceries, artifacts: @artifacts,
+       enchantments: @enchantments }
 
-    card_data
+    contents
   end
 
 private
 
   def deck_params
-    params.require(:deck).permit(:name, :mtg_format, :library)
+    params.require(:deck).permit(:name, :mtg_format, :library, :description)
   end
 
   def edit_deck_params
-    params.permit(:add, :delete, :remove_all, :add_playset, :search)
+    params.permit(:add, :delete, :remove_all, :add_playset, :card_search)
   end
 end

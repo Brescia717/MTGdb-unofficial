@@ -1,3 +1,17 @@
-// Place all the styles related to the comments controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.comment {
+
+  #comment-tag {
+
+    #comment-user {
+      color: rgb(48, 110, 217);
+      text-decoration: underline;
+    }
+
+    #comment-updated-at {
+      color: #b8b8b8;
+
+    }
+
+  }
+
+}

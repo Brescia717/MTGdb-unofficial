@@ -16,6 +16,13 @@
   <body>
 
     <%= render "layouts/nav" %>
+
+    <% flash.each do |name, msg| %>
+      <div class="alert-box <%= name %>">
+        <%= msg %>
+      </div>
+    <% end %>
+    
     <%= yield %>
 
   </body>
