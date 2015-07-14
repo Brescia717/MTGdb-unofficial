@@ -5,5 +5,5 @@ jQuery ->
     source: "/search_suggestions"
   $('span').hidden
   $('#adv_opts').click ->
-      $('p').toggle 'slow'
+      $('.search-form p').toggle 'slow'
       return
