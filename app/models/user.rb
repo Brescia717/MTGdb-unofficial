@@ -7,4 +7,8 @@ class User < ActiveRecord::Base
   has_many :decks, dependent: :destroy
   has_many :cards, through: :decks
   has_many :comments, dependent: :destroy
+
+  def user_tag
+    self.email.gsub(/@+\w+.+\z/, '')
+  end
 end
