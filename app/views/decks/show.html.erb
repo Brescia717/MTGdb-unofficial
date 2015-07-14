@@ -4,7 +4,12 @@
       <strong>Deck name: </strong><%= @deck.name %> -
       <strong>Created by: </strong><%= @deck.user_tag %>
     </p>
+    <strong>Description: </strong>
+    <p class="panel radius callout">
+      <%= @deck.description %>
+    </p>
     <p><strong>Format: </strong><%= @deck.mtg_format %></p>
+    <p><strong>Cost: </strong><%= @deck_price %></p>
     <div id="deck_edit_delete_btns">
     <% if @deck.user == current_user %>
       <%= link_to "Edit deck", edit_deck_path(@deck), class: "button tiny",
@@ -47,6 +52,7 @@
                   alt: "#{card[:multiverseid]}") %>
         <% end %>
       <% end %>
+      <% binding.pry %>
     </p>
     <br />
   </div>
