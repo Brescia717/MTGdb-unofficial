@@ -108,6 +108,7 @@ class DecksController < ApplicationController
     @card_data = []
     deck_data.each do |c|
       @card_data << {
+        id:           c[:card][:id],
         name:         c[:card][:name],
         multiverseid: c[:card][:multiverseid],
         types:        c[:card][:types],
@@ -122,17 +123,17 @@ class DecksController < ApplicationController
     @enchantments = []
     @card_data.each do |card|
       if card[:types].include?("Land")
-        @lands << card[:name]
+        @lands << { name: card[:name], multiverseid: card[:multiverseid], id: card[:id] }
       elsif card[:types].include?("Creature") || card[:types].include?("Summon")
-        @creatures << card[:name]
+        @creatures << { name: card[:name], multiverseid: card[:multiverseid], id: card[:id] }
       elsif card[:types].include?("Instant") || card[:types].include?("Interrupt")
-        @instants << card[:name]
+        @instants << { name: card[:name], multiverseid: card[:multiverseid], id: card[:id] }
       elsif card[:types].include?("Sorcery")
-        @sorceries << card[:name]
+        @sorceries << { name: card[:name], multiverseid: card[:multiverseid], id: card[:id] }
       elsif card[:types].include?("Artifact")
-        @artifacts << card[:name]
+        @artifacts << { name: card[:name], multiverseid: card[:multiverseid], id: card[:id] }
       elsif card[:types].include?("Enchantment")
-        @enchantments << card[:name]
+        @enchantments << { name: card[:name], multiverseid: card[:multiverseid], id: card[:id] }
       end
     end
     @lands        = @lands.each_with_object(Hash.new(0)) { |card,counts| counts[card] += 1 }

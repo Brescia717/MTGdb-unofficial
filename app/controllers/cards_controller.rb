@@ -7,8 +7,8 @@ class CardsController < ApplicationController
   end
 
   def show
-    @card        = Card.find_by(multiverseid: params[:multiverseid])
-    @card_price  = !@card.price.nil? ? "$#{@card.price}" : "Card not available"
+    @card        = Card.find_by(multiverseid: (params[:multiverseid] || params[:id]))
+    @card_price  = @card.price ? "$#{@card.price}" : "Card not available"
     @card_set    = @card.card_set.gsub(/[+]/, ' ')
     @card.name   = @card.name.gsub(/[+]/, ' ')
 
