@@ -26,7 +26,8 @@ gem 'nokogiri'
 gem 'foundation-rails'
 gem 'activerecord-session_store', github: 'rails/activerecord-session_store'
 gem 'whenever', :require => false
-gem 'rails_12factor'
+gem 'rails_12factor', group: :production
+gem 'unicorn'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
