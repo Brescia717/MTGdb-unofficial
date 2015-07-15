@@ -4,7 +4,7 @@
       <strong>Creatures: </strong><%= @creatures.count %>
       <% @creatures.each do |card, quant| %>
         <li data-image='http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=<%= "#{card[:multiverseid]}" %>&type=card'>
-          <%= link_to "#{card[:name]}", card_path(card[:multiverseid]) %><%=": #{quant}" %>
+          <span><%="#{quant} " %></span><%= link_to "#{card[:name]}", card_path(card[:multiverseid]) %>
         </li>
       <% end %>
     </ul>
@@ -14,7 +14,7 @@
       <strong>Lands: </strong><%= @lands.count %>
       <% @lands.each do |card, quant| %>
         <li data-image='http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=<%= "#{card[:multiverseid]}" %>&type=card'>
-          <%= link_to "#{card[:name]}", card_path(card[:multiverseid]) %><%=": #{quant}" %>
+          <span><%="#{quant} " %></span><%= link_to "#{card[:name]}", card_path(card[:multiverseid]) %>
         </li>
       <% end %>
     </ul>
@@ -24,7 +24,7 @@
       <strong>Enchantments: </strong><%= @enchantments.count %>
       <% @enchantments.each do |card, quant| %>
         <li data-image='http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=<%= "#{card[:multiverseid]}" %>&type=card'>
-          <%= link_to "#{card[:name]}", card_path(card[:multiverseid]) %><%=": #{quant}" %>
+          <span><%="#{quant} " %></span><%= link_to "#{card[:name]}", card_path(card[:multiverseid]) %>
         </li>
       <% end %>
     </ul>
@@ -32,7 +32,7 @@
       <strong>Artifacts: </strong><%= @artifacts.count %>
       <% @artifacts.each do |card, quant| %>
         <li data-image='http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=<%= "#{card[:multiverseid]}" %>&type=card'>
-          <%= link_to "#{card[:name]}", card_path(card[:multiverseid]) %><%=": #{quant}" %>
+          <span><%="#{quant} " %></span><%= link_to "#{card[:name]}", card_path(card[:multiverseid]) %>
         </li>
       <% end %>
     </ul>
@@ -40,7 +40,7 @@
       <strong>Instants: </strong><%= @instants.count %>
       <% @instants.each do |card, quant| %>
         <li data-image='http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=<%= "#{card[:multiverseid]}" %>&type=card'>
-          <%= link_to "#{card[:name]}", card_path(card[:multiverseid]) %><%=": #{quant}" %>
+          <span><%="#{quant} " %></span><%= link_to "#{card[:name]}", card_path(card[:multiverseid]) %>
         </li>
       <% end %>
     </ul>
@@ -48,7 +48,7 @@
       <strong>Sorceries: </strong><%= @sorceries.count %>
       <% @sorceries.each do |card, quant| %>
         <li data-image='http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=<%= "#{card[:multiverseid]}" %>&type=card'>
-          <%= link_to "#{card[:name]}", card_path(card[:multiverseid]) %><%=": #{quant}" %>
+          <span><%="#{quant} " %></span><%= link_to "#{card[:name]}", card_path(card[:multiverseid]) %>
         </li>
       <% end %>
     </ul>
