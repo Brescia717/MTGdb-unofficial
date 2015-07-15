@@ -15,8 +15,7 @@ class DecksController < ApplicationController
     @deck_data  = @deck.deck_data
     @deck_data.each { |x| @total ||= 0; x[:card][:price] ? @total += x[:card][:price] : next }
     @deck_price = @total ? "$#{@total}" : "$0.00"
-    @contents  = fetch_card_data(@deck_data)
-    # binding.pry
+    @contents   = fetch_card_data(@deck_data)
     @user       = current_user
     if params[:draw_hand]
       @hand      = []
