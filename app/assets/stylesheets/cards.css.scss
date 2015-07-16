@@ -66,3 +66,28 @@ margin-right: auto; */
 .hidden {
   display: none;
 }
+body {
+  width: 100%;
+  height: 100%;
+}
+
+#cards-table {
+  width: 100%;
+	overflow-y: auto;
+	_overflow: auto;
+	margin: 0 0 1em;
+  
+  &::-webkit-scrollbar
+  {
+  	-webkit-appearance: none;
+  	width: 14px;
+  	height: 14px;
+  }
+
+  &::-webkit-scrollbar-thumb
+  {
+  	border-radius: 8px;
+  	border: 3px solid #fff;
+  	background-color: rgba(0, 0, 0, .3);
+  }
+}
