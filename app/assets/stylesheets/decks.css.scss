@@ -46,13 +46,19 @@
   }
 }
 .contents {
+
   ul {
     list-style: none;
+    li {
+      span {
 
-    span {
-      color: #757575;
+        color: #757575;
+      }
     }
 
   }
+
+}
+.card-img-container {
 
 }
