@@ -1,5 +1,5 @@
 <div id="paginator"><%= paginate @cards, remote: true %></div>
-<div id="cards-table">
+<div id="cards-table" class="card-results">
   <table>
     <tr class="sort">
       <th><%= sort_link @search, :name, "Name" %></th>

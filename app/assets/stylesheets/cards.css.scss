@@ -71,12 +71,12 @@ body {
   height: 100%;
 }
 
-#cards-table {
+.card-results {
   width: 100%;
 	overflow-y: auto;
 	_overflow: auto;
 	margin: 0 0 1em;
-  
+
   &::-webkit-scrollbar
   {
   	-webkit-appearance: none;
