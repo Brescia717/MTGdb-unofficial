@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
-  
+
   resources  :users, only: :show
   resources  :cards do
     resources :comments
@@ -9,6 +9,10 @@ Rails.application.routes.draw do
     resources :comments
   end
   resources  :search_suggestions
+  resources  :carts
+  resources  :line_items
+
+  map.current_cart 'cart', :controller => 'carts', :action => 'show', :id => 'current'
 
   get '/card/:multiverseid'      => 'cards#show',  as: 'card_multiverseid'
   get '/decks/:id/hand'          => 'decks#show',  as: 'draw_hand'
