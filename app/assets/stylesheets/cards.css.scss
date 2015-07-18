@@ -91,3 +91,25 @@ body {
   	background-color: rgba(0, 0, 0, .3);
   }
 }
+
+#check:checked ~ label #cover {
+  display:block;
+}
+#cover {
+  position:absolute;
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
+  background:rgba(0,0,0,0.5);
+  display:none;
+}
+#box {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  /* margin:auto; */
+/*   width:auto;
+height:auto; */
+  border:1px solid white;
+}

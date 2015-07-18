@@ -1,28 +1,40 @@
-<% title "Shopping Cart" %>
+<div id="cart-show">
+  <h1>Shopping Cart</h1>
 
-<table id="line-items">
-  <tr>
-    <th>Product</th>
-    <th>Qty</th>
-    <th class="price">Unit Price</th>
-    <th class="price">Full Price</th>
-  </tr>
-  <% for line_item in @cart.line_items %>
-    <tr class="<%= cycle :odd, :even %>">
-      <td><%=h line_item.card.name %></td>
-      <td class="qty"><%= line_item.quantity %></td>
-      <td class="price"><%= number_to_currency(line_item.unit_price) %></td>
-      <td class="price"><%= number_to_currency(line_item.full_price) %></td>
+  <table id="line-items">
+    <tr>
+      <th>Product</th>
+      <th>Qty <span>(max: 4)</span></th>
+      <th class="price">Unit Price</th>
+      <th class="price">Full Price</th>
     </tr>
-  <% end %>
-  <tr>
-    <td class="total price" colspan="4">
-      Total: <%= number_to_currency @cart.total_price %>
-    </td>
-  </tr>
-</table>
+    <% @cart_line_items.each do |line_item| %>
+      <tr class="<%= cycle :odd, :even %>">
+        <td><%= line_item.card.name %></td>
+        <td class="qty">
+          <%= form_for line_item, :url => line_item_path(id: line_item.id) do |f| %>
+            <div class="field">
+              <%= f.number_field :quantity, value: line_item.quantity, min: 1, max: 4 %>
+              <p>
+                <%= submit_tag "Update" %> |
+                <%= link_to "Delete", line_item_path(id: line_item.id), method: :delete %>
+              </p>
+            </div>
+          <% end %>
+        </td>
+        <td class="price"><%= number_to_currency(line_item.unit_price) %></td>
+        <td class="price"><%= number_to_currency(line_item.full_price) %></td>
+      </tr>
+    <% end %>
+    <tr>
+      <td class="total price" colspan="4">
+        Total: <%= number_to_currency @cart.total_price %>
+      </td>
+    </tr>
+  </table>
 
-<p>
-  <%= link_to "Continue Shopping", cards_url %> |
-  <%= link_to "Checkout", @cart.paypal_url(cards_url) %>
-</p>
+  <p>
+    <%= link_to "Continue Shopping", cards_url %> |
+    <%= link_to "Checkout", @cart.paypal_url(cards_url) %>
+  </p>
+</div>

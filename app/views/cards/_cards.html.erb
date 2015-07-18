@@ -9,6 +9,8 @@
       <th>Text</th>
       <th>Power/Toughness</th>
       <th>CardImage</th>
+      <th>Price</th>
+      <th>Shopping</th>
     </tr>
     <% @cards.each do |card| %>
       <tr>
@@ -24,6 +26,16 @@
           <a href="<%= card_multiverseid_path(card.multiverseid) %>">
             <img src="<%= card.fetch_image %>" alt="<%= card.name %>" id="card-image" />
           </a>
+        </td>
+        <td><%= card.price %></td>
+        <td>
+          <div class="actions">
+            <% if card.price %>
+              <%= link_to "Add to Cart", line_items_path(:card_id => card), :method => :post %>
+            <% else %>
+              <p>Card not available.</p>
+            <% end %>
+          </div>
         </td>
       </tr>
     <% end %>

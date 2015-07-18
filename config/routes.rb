@@ -12,8 +12,6 @@ Rails.application.routes.draw do
   resources  :carts
   resources  :line_items
 
-  map.current_cart 'cart', :controller => 'carts', :action => 'show', :id => 'current'
-
   get '/card/:multiverseid'      => 'cards#show',  as: 'card_multiverseid'
   get '/decks/:id/hand'          => 'decks#show',  as: 'draw_hand'
   get '/decks/:id/game'          => 'games#show',  as: 'new_game'
