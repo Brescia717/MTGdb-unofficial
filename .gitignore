@@ -12,3 +12,4 @@
 !/log/.keep
 /tmp
 /card_images
+/config/paypal.yml
