@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
+  get 'payment_notifications/create'
+
   devise_for :users
-  
+
   resources  :users, only: :show
   resources  :cards do
     resources :comments
@@ -9,10 +11,13 @@ Rails.application.routes.draw do
     resources :comments
   end
   resources  :search_suggestions
+  resources  :carts, only: :show
+  resources  :line_items, only: [:create, :update, :destroy]
+  resources  :payment_notifications, only: :create
 
   get '/card/:multiverseid'      => 'cards#show',  as: 'card_multiverseid'
   get '/decks/:id/hand'          => 'decks#show',  as: 'draw_hand'
-  get '/decks/:id/game'          => 'games#show',  as: 'new_game'
+  # get '/decks/:id/game'          => 'games#show',  as: 'new_game'
 
   root 'cards#index'
 

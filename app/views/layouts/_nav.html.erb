@@ -7,6 +7,7 @@
   <section class="top-bar-section">
     <ul class="right">
       <% if current_user %>
+        <li><%= link_to "Shopping Cart", current_cart if current_cart%></li>
         <li><%= link_to "My Profile", user_path(current_user) %></li>
         <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
       <% else %>
@@ -63,6 +64,7 @@
         <ul class="off-canvas-list">
           <li><label>Accounts</label></li>
           <% if current_user %>
+            <li><%= link_to "Shopping Cart", current_cart if current_cart%></li>
             <li><%= link_to "My Profile", user_path(current_user) %></li>
             <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
           <% else %>

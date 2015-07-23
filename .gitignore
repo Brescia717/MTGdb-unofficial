@@ -12,3 +12,9 @@
 !/log/.keep
 /tmp
 /card_images
+/config/paypal.yml
+/.rbenv
+/.vagrant
+/.env
+/ruby-build
+/Vagrantfile
