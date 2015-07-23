@@ -11,8 +11,9 @@ Rails.application.routes.draw do
     resources :comments
   end
   resources  :search_suggestions
-  resources  :carts
-  resources  :line_items
+  resources  :carts, only: :show
+  resources  :line_items, only: [:create, :update, :destroy]
+  resources  :payment_notifications, only: :create
 
   get '/card/:multiverseid'      => 'cards#show',  as: 'card_multiverseid'
   get '/decks/:id/hand'          => 'decks#show',  as: 'draw_hand'
