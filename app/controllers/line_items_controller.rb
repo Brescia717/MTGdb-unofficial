@@ -1,4 +1,6 @@
 class LineItemsController < ApplicationController
+  before_action :authenticate_user!
+  
   def create
     @card      = Card.find(params[:card_id])
     @line_item = LineItem.create!(:cart => current_cart, :card => @card, :quantity => 1, :unit_price => @card.price)
