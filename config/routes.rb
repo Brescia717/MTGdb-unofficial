@@ -17,7 +17,7 @@ Rails.application.routes.draw do
 
   get '/card/:multiverseid'      => 'cards#show',  as: 'card_multiverseid'
   get '/decks/:id/hand'          => 'decks#show',  as: 'draw_hand'
-  # get '/decks/:id/game'          => 'games#show',  as: 'new_game'
+  get '/decks/:id/game'          => 'games#show',  as: 'new_game'
 
   root 'cards#index'
 
