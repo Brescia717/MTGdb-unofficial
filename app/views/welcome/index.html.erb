@@ -1,0 +1,30 @@
+<div class="row">
+  <header>
+    <h2>Featured Cards</h2>
+  </header>
+  <div id="featured-cards" class="large-3 medium-4 small-6 columns">
+    <div id="carousel">
+      <div class="scroller">
+        <% @carousel.each do |card| %>
+        <div>
+          <h5><%= card.name %></h5>
+          <a href="<%= card_multiverseid_path(card.multiverseid) %>">
+            <img src="<%= card.fetch_image %>" alt="<%= card.name %>" id="card-image" />
+          </a>
+          <p>
+            Set: <%= card.card_set %><br>
+            Price: <%= card.price ? number_to_currency( card.price ) : "Not available" %>
+          </p>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div id="welcome" class="panel radius callout large-4 medium-5 small-6 columns">
+    <p>
+      Welcome to MTGdb-unofficial! This site is designed for you to be able to
+      buy and trade cards, build decks, and (eventually) playtest them.
+      Signup, make a deck, and get some feedback!
+    </p>
+  </div>
+</div>

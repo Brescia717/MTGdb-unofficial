@@ -16,7 +16,8 @@
       <% end %>
     </ul>
     <ul class="left">
-      <li><%= link_to "Cards Search", root_path %></li>
+      <li><%= link_to "Home", root_path %></li>
+      <li><%= link_to "Cards Search", cards_path %></li>
       <li class="has-dropdown">
         <%= link_to "Decks", decks_path %>
         <ul class="dropdown">
@@ -36,7 +37,7 @@
         </section>
 
         <section class="middle tab-bar-section">
-          <h1 class="title">MTGdb-unofficial</h1>
+          <h1 class="title"><%= link_to "MTGdb-unofficial", root_path %></h1>
         </section>
 
         <section class="right-small">
@@ -47,7 +48,8 @@
       <aside class="left-off-canvas-menu">
         <ul class="off-canvas-list">
           <li><label>Navigation</label></li>
-          <li><%= link_to "Cards Search", root_path %></li>
+          <li><%= link_to "Home", root_path %></li>
+          <li><%= link_to "Cards Search", cards_path %></li>
           <li class="has-submenu">
             <a href="#">Decks</a>
             <ul class="left-submenu">

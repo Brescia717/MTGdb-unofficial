@@ -17,6 +17,7 @@
 //= require jquery.purr
 //= require best_in_place
 //= require jquery.turbolinks
+//= require jquery.slick
 //= require foundation
 //= require turbolinks
 //= require_tree .

@@ -1,9 +1,16 @@
-.layout {
-  /* padding: 2%; */
-}
 .main-section {
   padding: 2%;
 }
+
+.title {
+  a {
+    color: white;
+    &:hover {
+      color: #3194e4;
+    }
+  }
+}
+
 
 footer {
   background-color: #333;
