@@ -30,7 +30,6 @@
 <div class="off-canvas-wrap" data-offcanvas>
   <div class="inner-wrap">
     <div class="hide-for-large-up">
-
       <nav class="tab-bar">
         <section class="left-large">
           <a class="left-off-canvas-toggle menu-icon" href="#"><span></span></a>
@@ -74,6 +73,7 @@
         </ul>
       </aside>
     </div>
+
     <section class="main-section">
       <% flash.each do |name, msg| %>
         <div class="alert-box <%= name %>">
@@ -87,6 +87,49 @@
 
       </div>
     </section>
+
+    <footer>
+      <div class="row">
+        <div class="large-4 columns" id="contact-me">
+          <h5>Contact Me</h5>
+          <p>Paul Brescia</p>
+          <p>Github: <a href="https://github.com/Brescia717">Brescia717</a></p>
+          <p>LinkedIn: <a href="https://www.linkedin.com/in/paulbresciajr">paulbresciajr</a></p>
+          <p>Twitter: <a href="https://twitter.com/brescia717">@brescia717</a></p>
+        </div>
+        <div class="large-5 columns" id="follow-me">
+          <h5>Follow Me</h5>
+          <p>
+            <a class="fa-stack fa-lg fa-2x" href="https://github.com/Brescia717">
+              <i class="fa fa-square-o fa-stack-2x"></i>
+              <i class="fa fa-github fa-stack-1x"></i>
+            </a>
+            <a class="fa-stack fa-lg fa-2x" href="https://www.linkedin.com/in/paulbresciajr">
+              <i class="fa fa-square-o fa-stack-2x"></i>
+              <i class="fa fa-linkedin fa-stack-1x"></i>
+            </a>
+            <a class="fa-stack fa-lg fa-2x" href="https://twitter.com/brescia717">
+              <i class="fa fa-square-o fa-stack-2x"></i>
+              <i class="fa fa-twitter fa-stack-1x"></i>
+            </a>
+          </p>
+        </div>
+        <div class="large-3 columns" id="legal-disclaimer">
+          <h5>Legal Disclaimer</h5>
+          <p>
+            This application uses PayPal's test environment. Only PayPal
+            test environment accounts may be used for transactions.
+          </p>
+        </div>
+        <div class="large-12 columns" id="copyright" >
+          <hr>
+          <p>
+            Made by Phantom Apps. All rights reserved.
+            <a href="#">Terms and conditions</a>
+          </p>
+        </div>
+      </div>
+    </footer>
 
     <a class="exit-off-canvas"></a>
 
