@@ -1,0 +1,19 @@
+.scroller div {
+  h5 {
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 25px;
+    color: rgb(249, 249, 249);
+    font-weight: bold;
+    text-align: center;
+  }
+  p {
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+    color: rgb(249, 249, 249);
+    text-align: center;
+    span {
+      font-weight: bold;
+      color: rgb(110, 194, 116);
+    }
+  }
+}

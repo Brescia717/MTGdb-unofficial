@@ -1,7 +1,7 @@
-<div class="row">
-  <header>
-    <h2>Featured Cards</h2>
-  </header>
+<div class="header" media="screen">
+  <h2>Featured Cards</h2>
+</div>
+<div class="row container" id="welcome-index">
   <div id="featured-cards" class="large-3 medium-4 small-6 columns">
     <div id="carousel">
       <div class="scroller">
@@ -12,8 +12,8 @@
             <img src="<%= card.fetch_image %>" alt="<%= card.name %>" id="card-image" />
           </a>
           <p>
-            Set: <%= card.card_set %><br>
-            Price: <%= card.price ? number_to_currency( card.price ) : "Not available" %>
+            <span>Set: </span><%= card.card_set %><br>
+            <span>Price: </span><%= card.price ? number_to_currency( card.price ) : "Not available" %>
           </p>
         </div>
         <% end %>
