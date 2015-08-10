@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   devise_for :users
 
+  resources  :welcome, only: :index
   resources  :users, only: :show
   resources  :cards do
     resources :comments
@@ -19,7 +20,7 @@ Rails.application.routes.draw do
   get '/decks/:id/hand'          => 'decks#show',  as: 'draw_hand'
   # get '/decks/:id/game'          => 'games#show',  as: 'new_game'
 
-  root 'cards#index'
+  root 'welcome#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

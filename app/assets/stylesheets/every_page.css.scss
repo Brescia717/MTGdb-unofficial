@@ -1,3 +1,110 @@
-.layout {
+.main-section {
   padding: 2%;
+}
+
+.container {
+  padding: 2%;
+}
+
+.header {
+  position: relative;
+  padding: 5px;
+  width: 120%;
+  /* bottom: 15px; */
+  right: 30px;
+  color: rgb(98, 107, 110);
+  background-color: rgba(44, 146, 212, .8);
+  display: block;
+  box-sizing: inherit;
+  @media (max-width: 640px) { bottom: 8px;}
+  @media (min-width: 641px) and (max-width: 800px) {bottom: 16px;}
+  @media (min-width: 801px) and (max-width: 1024px) {bottom: 15.5px;}
+  @media (min-width: 1025px) {bottom: 26px;}
+  h2 {
+    margin-left: 10%;
+    color: white;
+  }
+}
+
+.title {
+  a {
+    color: white;
+    &:hover {
+      color: #3194e4;
+    }
+  }
+}
+
+
+footer {
+  background-color: #333;
+  font-family: helvetica;
+  /* display: table-cell; */
+  border-right: solid #a175c4 1px;
+  font-weight: bold;
+  padding-top: 25px;
+  box-sizing: border-box;
+  #contact-me {
+    h5 {
+      color: white;
+      padding-bottom: 10px;
+    }
+    p {
+      margin: 1px;
+      color: gray;
+      font-size: 85%;
+      &:last-child {
+        padding-bottom: 10px;
+      }
+    }
+    a {
+      color: white;
+      &:hover {
+        color: #3194e4;
+      }
+    }
+  }
+  #follow-me {
+    h5 {
+      color: white;
+      padding-bottom: 10px;
+      margin-left: 6px;
+    }
+    p {
+      color: white;
+      font-size: 85%;
+    }
+    a {
+      color: gray;
+      &:hover {
+        color: #3194e4;
+      }
+    }
+  }
+  #legal-disclaimer {
+    h5 {
+      color: white;
+      padding-bottom: 10px;
+    }
+    p {
+      color: white;
+      font-size: 85%;
+    }
+  }
+  hr {
+    border-color: gray;
+  }
+  #copyright {
+    p {
+      color: white;
+      font-size: 85%;
+    }
+    a {
+      color: gray;
+      text-decoration: underline;
+      &:hover {
+        color: #3194e4;
+      }
+    }
+  }
 }

@@ -1,13 +1,18 @@
+<div class="header">
+  <h2>Cards</h2>
+</div>
 <div class="card-index row">
-  <h1>Cards</h1>
   <%= javascript_tag "pagination" %>
   <div class="row">
     <div id="search" class="large-3 medium-4 small-5 columns"><%= render "search" %></div>
-    <div id="welcome" class="panel radius callout large-4 medium-5 small-6 columns">
+    <div id="welcome" class="panel radius large-4 medium-5 small-6 columns">
       <p>
-        Welcome to MTGdb-unofficial! This site is designed for you to be able to
-        buy and trade cards, build decks, and (eventually) playtest them.
-        Signup, make a deck, and get some feedback!
+        Search for cards you would like to view/purchase. Click the card's name
+        to see all of its information. Click "Advanced Search" to see a
+        list of additional filters.<br><br>
+
+        <strong>Note: </strong>Some screen sizes may require scrolling the search results to the
+        right in order to view price and purchasing.
       </p>
     </div>
   </div>
