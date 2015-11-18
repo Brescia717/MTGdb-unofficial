@@ -48,4 +48,11 @@ group :development, :test do
   gem 'spring'
   gem 'paperclip', '~> 4.2'
   gem 'rmagick'
+  gem 'pry-rails'
+  gem 'dotenv-rails'
+  gem 'rspec-rails'
+  gem 'capybara'
+  gem 'selenium-webdriver'
+  gem 'factory_girl_rails', '~> 4.0'
+  gem 'faker'
 end

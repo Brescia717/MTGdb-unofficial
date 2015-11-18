@@ -7,7 +7,6 @@ file = File.read("AllSets-x.json")
 sets = JSON.parse(file)
 # cards = []
 
-# This will be modified later to include more information, including multiverseid for card images.
 sets.each do |set_key, set_data|
   set_data['cards'].each do |c|
     if c['multiverseid'] == nil

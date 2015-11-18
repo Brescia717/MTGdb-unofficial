@@ -73,5 +73,6 @@ class Card < ActiveRecord::Base
         next
       end
     end
+    puts "Update completed at #{Time.now}"
   end
 end

@@ -18,3 +18,4 @@
 /.env
 /ruby-build
 /Vagrantfile
+/cron_log.log
