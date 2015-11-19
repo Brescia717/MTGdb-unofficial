@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 feature "User uses Card Search", js: true do
-  card = FactoryGirl.create(:card)
+  let(:card) { create(:card)}
 
   background do
     visit cards_path
@@ -12,6 +12,7 @@ feature "User uses Card Search", js: true do
     fill_in("cards_autocomplete_name", with: card.name)
     click_on "card-search-submit"
 
-    expect(page).to have_css("#cards-table td")
+    expect(page).to have_css("#cards-table td#card-name")
+    expect(page.first('#cards-table td#card-name').text).to eq("Cryptic Command")
   end
 end
