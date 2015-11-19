@@ -2,7 +2,7 @@
 <div class="search-form">
   <%= search_form_for @search, remote: true do |f| %>
     <div class="field">
-      <%= f.label :name_cont, "Name" %>
+      <%= f.label :name_cont, "Name", id: "card-search-name" %>
       <%= f.text_field :name_cont, id: "cards_autocomplete_name" %>
       <p class="hidden">
         <%= f.label :cmc_gteq, "CMC min" %>
@@ -27,7 +27,7 @@
     </p>
     </div>
     <div class="actions">
-      <%= f.submit "Search", class: "button tiny" %>
+      <%= f.submit "Search", class: "button tiny", id: "card-search-submit" %>
       <%= link_to "Advanced Search", '#', class: "button tiny", id: "adv_opts" %>
       <%= link_to "Clear Search", request.path, class:"button tiny cancel-button" %>
     </div>

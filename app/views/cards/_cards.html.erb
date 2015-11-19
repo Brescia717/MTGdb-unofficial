@@ -14,21 +14,21 @@
     </tr>
     <% @cards.each do |card| %>
       <tr>
-        <td>
+        <td id="card-name">
           <%= link_to card.name, card_multiverseid_path(card.multiverseid) %>
         </td>
-        <td><%= card.mana_cost %></td>
-        <td><%= card.type_and_subtype %></td>
-        <td><%= card.rarity %></td>
-        <td><%= card.text %></td>
-        <td><%= card.power_and_toughness %></td>
-        <td>
+        <td id="mana-cost"><%= card.mana_cost %></td>
+        <td id="type-and-subtype"><%= card.type_and_subtype %></td>
+        <td id="rarity"><%= card.rarity %></td>
+        <td id="card-text"><%= card.text %></td>
+        <td id="power-and-toughness"><%= card.power_and_toughness %></td>
+        <td id="card-img">
           <a href="<%= card_multiverseid_path(card.multiverseid) %>">
             <img src="<%= card.fetch_image %>" alt="<%= card.name %>" id="card-image" />
           </a>
         </td>
-        <td><%= card.price %></td>
-        <td>
+        <td id="card-price"><%= card.price %></td>
+        <td id="add-to-cart">
           <div class="actions">
             <% if card.price %>
               <%= link_to "Add to Cart", line_items_path(:card_id => card), :method => :post %>
