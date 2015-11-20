@@ -4,6 +4,10 @@ class CardsController < ApplicationController
     @cards  = @search.result.page(params[:page]) if params[:q]
     session[:cards_path] = true
     session.delete(:decks_path)
+
+    @card_colors = SearchFields.new.colors
+    @card_types  = SearchFields.new.types
+    @card_legal_formats = SearchFields.new.legal_formats
   end
 
   def show

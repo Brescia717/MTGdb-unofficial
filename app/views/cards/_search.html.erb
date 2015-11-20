@@ -10,9 +10,9 @@
         <%= f.label :cmc_lteq, "CMC max" %>
         <%= f.select :cmc_lteq, 0..20, {include_blank: ""} %>
         <%= f.label :colors_cont, "Colors" %>
-        <%= f.select :colors_cont, SearchFields.new().colors, {include_blank: true} %>
+        <%= f.select :colors_cont, @card_colors, {include_blank: true} %>
         <%= f.label :types_cont, "Type" %>
-        <%= f.select :types_cont, SearchFields.new().types, {include_blank: true} %>
+        <%= f.select :types_cont, @card_types, {include_blank: true} %>
         <%= f.label :subtypes_cont, "Subtype" %>
         <%= f.text_field :subtypes_cont %>
         <%= f.label :power_eq, "Power" %>
@@ -23,7 +23,7 @@
         <%= f.hidden_field :printings_cont %>
         <%= f.text_field :printings_cont %>
         <%= f.label :legalities_cont, "Format" %>
-        <%= f.select :legalities_cont, SearchFields.new().legal_formats, {include_blank: true} %>
+        <%= f.select :legalities_cont, @card_legal_formats, {include_blank: true} %>
     </p>
     </div>
     <div class="actions">
