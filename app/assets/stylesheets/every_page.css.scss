@@ -1,10 +1,26 @@
+.inner-wrap {
+  background: rgb(214, 213, 214);
+}
 .main-section {
+  background: rgb(214, 213, 214);
   padding: 2%;
+  .container {
+    padding: 2%;
+    border-radius: 5px;
+    background-image: image_url("welcome_background.jpg");
+    background-size: cover;
+  }
 }
 
-.container {
-  padding: 2%;
+.foundation-flash {
+  background: rgb(214, 213, 214);
+  // padding-bottom: 10px;
 }
+
+// .container {
+//   padding: 2%;
+//   border-radius: 5px;
+// }
 
 .header {
   position: relative;

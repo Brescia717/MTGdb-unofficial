@@ -75,14 +75,15 @@
         </ul>
       </aside>
     </div>
-
-    <section class="main-section">
+    <!-- class="main-section" -->
+    <div class="foundation-flash">
       <% flash.each do |name, msg| %>
         <div class="alert-box <%= name %>">
           <%= msg %>
         </div>
       <% end %>
-
+    </div>
+    <section class="main-section">
       <div class="layout show">
 
         <%= yield %>
