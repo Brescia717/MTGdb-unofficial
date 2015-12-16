@@ -17,7 +17,7 @@ class Game
       @library.shuffle!
       @hand = @library.shift(7).flatten
     else
-      i        = self.hand.size
+      i = self.hand.size
       @library = @library + @hand.shift(i)
       i -= 1
       @library.shuffle!

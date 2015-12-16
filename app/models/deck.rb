@@ -10,13 +10,13 @@ class Deck < ActiveRecord::Base
     presence: true,
     null: false
 
-  def library
-    self[:library] || Array.new
-  end
-
   serialize :library, JSON
 
   paginates_per 12
+
+  def library
+    self[:library] || Array.new
+  end
 
   def user_tag
     self.user.email.gsub(/@+\w+.+\z/, '')
